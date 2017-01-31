@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/system/log/list.js"></script>
-	
+	 
       <!-- 
       需要放开 common.jspf 的js
         时间控件 -------- 可能导致样式问题,和某些js事件失效 如加上,,自行处理

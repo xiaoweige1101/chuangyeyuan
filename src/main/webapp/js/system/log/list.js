@@ -22,11 +22,13 @@ $(function() {
 				}, {
 					colkey : "accountName",
 					name : "账号",
-					isSort:true
+					isSort:true,
+					hide : true
 				}, {
 					colkey : "module",
 					name : "模块",
-					isSort:true
+					isSort:true,
+					hide : true
 				}, {
 					colkey : "methods",
 					name : "方法",
@@ -35,17 +37,20 @@ $(function() {
 					colkey : "actionTime",
 					name : "响应时间",
 					width : "150px",
-					isSort:true
+					isSort:true,
+					hide : true
 				} , {
 					colkey : "actionTime",
 					name : "响应时间",
 					width : "150px",
-					isSort:true
+					isSort:true,
+					hide : true
 				} , {
 					colkey : "actionTime",
 					name : "响应时间",
 					width : "150px",
-					isSort:true
+					isSort:true,
+					hide : true
 				} , {
 					colkey : "userIP",
 					name : "IP地址",

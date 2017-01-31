@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-01-25 11:14:03
+Date: 2017-01-31 10:32:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,7 +53,7 @@ CREATE TABLE `ly_log` (
   `operTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `description` varchar(5000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ly_log
@@ -75,33 +75,15 @@ CREATE TABLE `ly_resources` (
   `ishide` int(3) DEFAULT '0',
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ly_resources
 -- ----------------------------
-INSERT INTO `ly_resources` VALUES ('1', '系统基础管理', '0', 'system', '0', 'system', '1', 'fa-desktop', '0', '系统基础管理');
-INSERT INTO `ly_resources` VALUES ('2', '用户管理', '1', 'account', '1', '/user/list.shtml', '2', null, '0', null);
-INSERT INTO `ly_resources` VALUES ('3', '角色管理', '1', 'role', '1', '/role/list.shtml', '7', 'fa-list', '0', '组管理');
-INSERT INTO `ly_resources` VALUES ('4', '菜单管理', '1', 'ly_resources', '1', '/resources/list.shtml', '12', 'fa-list-alt', '0', '菜单管理');
-INSERT INTO `ly_resources` VALUES ('5', '新增用户', '2', 'account_add', '2', '/user/addUI.shtml', '3', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;addAccount&quot;&nbsp;class=&quot;btn&nbsp;btn-primary&nbsp;marR10&quot;&gt;新增&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('6', '修改用户', '2', 'account_edit', '2', '/user/editUI.shtml', '4', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;editAccount&quot;&nbsp;class=&quot;btn&nbsp;btn-info&nbsp;marR10&quot;&gt;编辑&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('7', '删除用户', '2', 'account_delete', '2', '/user/deleteById.shtml', '5', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;delAccount&quot;&nbsp;class=&quot;btn&nbsp;btn-danger&nbsp;marR10&quot;&gt;删除&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('8', '新增角色', '3', 'role_add', '2', '/role/addUI.shtml', '8', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;addRole&quot;&nbsp;class=&quot;btn&nbsp;btn-primary&nbsp;marR10&quot;&gt;新增&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('9', '修改角色', '3', 'role_edit', '2', '/role/editUI.shtml', '9', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;editRole&quot;&nbsp;class=&quot;btn&nbsp;btn-info&nbsp;marR10&quot;&gt;编辑&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('10', '删除角色', '3', 'role_delete', '2', '/role/delete.shtml', '10', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;delRole&quot;&nbsp;class=&quot;btn&nbsp;btn-danger&nbsp;marR10&quot;&gt;删除&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('11', '分配权限', '3', 'role_perss', '2', '/resources/permissions.shtml', '11', '无', '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;permissions&quot;&nbsp;class=&quot;btn&nbsp;btn&nbsp;btn-grey&nbsp;marR10&quot;&gt;分配权限&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('25', '登陆信息管理', '0', 'ly_login', '0', 'ly_login', '18', 'fa-calendar', '0', '登陆信息管理');
-INSERT INTO `ly_resources` VALUES ('26', '用户登录记录', '25', 'ly_log_list', '1', '/userlogin/listUI.shtml', '19', null, '0', '用户登录记录');
-INSERT INTO `ly_resources` VALUES ('27', '操作日志管理', '0', 'ly_log', '0', 'ly_log', '20', 'fa-picture-o', '1', '操作日志管理');
-INSERT INTO `ly_resources` VALUES ('28', '日志查询', '27', 'ly_log', '1', '/log/list.shtml', '21', null, '0', null);
-INSERT INTO `ly_resources` VALUES ('29', '新增菜单资源', '4', 'ly_resources_add', '2', '/resources/addUI.shtml', '13', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;addFun&quot;&nbsp;class=&quot;btn&nbsp;btn-primary&nbsp;marR10&quot;&gt;新增&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('30', '修改菜单资源', '4', 'ly_resources_edit', '2', '/resources/editUI.shtml', '14', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;editFun&quot;&nbsp;class=&quot;btn&nbsp;btn-info&nbsp;marR10&quot;&gt;编辑&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('31', '删除菜单资源', '4', 'ly_resources_delete', '2', '/resources/delete.shtml', '15', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;delFun&quot;&nbsp;class=&quot;btn&nbsp;btn-danger&nbsp;marR10&quot;&gt;删除&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('32', '系统监控管理', '0', 'monitor', '0', 'monitor', '16', 'fa-tag', '0', '系统监控管理');
-INSERT INTO `ly_resources` VALUES ('33', '实时监控', '32', 'sysmonitor', '1', '/monitor/monitor.shtml', '17', null, '0', '实时监控');
-INSERT INTO `ly_resources` VALUES ('34', '分配权限', '2', 'permissions', '2', '/resources/permissions.shtml', '6', null, '0', '&lt;button&nbsp;type=&quot;button&quot;&nbsp;id=&quot;permissions&quot;&nbsp;class=&quot;btn&nbsp;btn&nbsp;btn-grey&nbsp;marR10&quot;&gt;分配权限&lt;/button&gt;');
-INSERT INTO `ly_resources` VALUES ('35', '告警列表', '32', 'monitor_warn', '1', '/monitor/list.shtml', null, null, '0', '告警列表');
+INSERT INTO `ly_resources` VALUES ('1', '主页', '0', 'homepage', '0', '/homepage/homepage.shtml', '0', 'fa-tag', '0', '主页');
+INSERT INTO `ly_resources` VALUES ('2', '房间管理', '0', 'roomManagement', '0', '/manage/roon.shtml', '0', 'fa-tag', '0', '房间管理');
+INSERT INTO `ly_resources` VALUES ('3', '租客管理', '0', 'guestManagement', '0', '/manage/guest.shtml', '0', 'fa-tag', '0', '房客管理');
+INSERT INTO `ly_resources` VALUES ('4', '操作日志管理', '0', 'ly_log', '0', '/log/list.shtml', '20', 'fa-picture-o', '0', '操作日志管理');
 
 -- ----------------------------
 -- Table structure for ly_res_user
@@ -120,24 +102,6 @@ INSERT INTO `ly_res_user` VALUES ('1', '3');
 INSERT INTO `ly_res_user` VALUES ('2', '3');
 INSERT INTO `ly_res_user` VALUES ('3', '3');
 INSERT INTO `ly_res_user` VALUES ('4', '3');
-INSERT INTO `ly_res_user` VALUES ('5', '3');
-INSERT INTO `ly_res_user` VALUES ('6', '3');
-INSERT INTO `ly_res_user` VALUES ('7', '3');
-INSERT INTO `ly_res_user` VALUES ('8', '3');
-INSERT INTO `ly_res_user` VALUES ('9', '3');
-INSERT INTO `ly_res_user` VALUES ('10', '3');
-INSERT INTO `ly_res_user` VALUES ('11', '3');
-INSERT INTO `ly_res_user` VALUES ('25', '3');
-INSERT INTO `ly_res_user` VALUES ('26', '3');
-INSERT INTO `ly_res_user` VALUES ('27', '3');
-INSERT INTO `ly_res_user` VALUES ('28', '3');
-INSERT INTO `ly_res_user` VALUES ('29', '3');
-INSERT INTO `ly_res_user` VALUES ('30', '3');
-INSERT INTO `ly_res_user` VALUES ('31', '3');
-INSERT INTO `ly_res_user` VALUES ('32', '3');
-INSERT INTO `ly_res_user` VALUES ('33', '3');
-INSERT INTO `ly_res_user` VALUES ('34', '3');
-INSERT INTO `ly_res_user` VALUES ('35', '3');
 
 -- ----------------------------
 -- Table structure for ly_role
@@ -244,11 +208,29 @@ CREATE TABLE `ly_userlogin` (
   `loginIP` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ly_user_loginlist` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ly_userlogin
 -- ----------------------------
+INSERT INTO `ly_userlogin` VALUES ('143', '3', 'admin', '2017-01-26 17:01:10', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('144', '3', 'admin', '2017-01-28 21:44:45', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('145', '3', 'admin', '2017-01-28 22:08:24', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('146', '3', 'admin', '2017-01-29 17:06:36', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('147', '3', 'admin', '2017-01-29 22:52:14', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('148', '3', 'admin', '2017-01-29 22:54:13', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('149', '3', 'admin', '2017-01-29 23:06:52', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('150', '3', 'admin', '2017-01-30 19:45:05', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('151', '3', 'admin', '2017-01-30 20:11:47', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('152', '3', 'admin', '2017-01-30 21:36:51', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('153', '3', 'admin', '2017-01-30 21:39:55', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('154', '3', 'admin', '2017-01-30 21:41:07', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('155', '3', 'admin', '2017-01-30 21:42:05', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('156', '3', 'admin', '2017-01-30 21:51:07', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('157', '3', 'admin', '2017-01-30 21:51:27', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('158', '3', 'admin', '2017-01-31 10:16:45', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('159', '3', 'admin', '2017-01-31 10:19:55', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('160', '3', 'admin', '2017-01-31 10:30:49', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for ly_user_role

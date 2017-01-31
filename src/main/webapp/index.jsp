@@ -19,22 +19,28 @@
 		var tb = $("#loadhtml");
 		tb.html(CommnUtil.loadingImg());
 		tb.load(rootPath+"/welcome.jsp");
+
 		$("[nav-n]").each(function () {
 				$(this).bind("click",function(){
 						var nav = $(this).attr("nav-n");
 						var sn = nav.split(",");
 						var html = '<li><i class="fa fa-home"></i>';
 						html+='<a href="index.shtml">Home</a></li>';
-						for(var i=0;i<2;i++){
+						for(var i=0;i<1;i++){
 							html+='<li><a href="javascript:void(0)">'+sn[i]+'</a></li>';
 						}
 						$("#topli").html(html);
 						var tb = $("#loadhtml");
 						tb.html(CommnUtil.loadingImg());
+						console.log("sn[0]:" + sn[0]);
+						console.log("sn[1]:" + sn[1]);
+						console.log("sn[2]:" + sn[2]);
 						tb.load(rootPath+sn[2]);
 				});
 			});
+
 		});
+
 </script>
 </head>
 <body class="" style="">
@@ -198,31 +204,39 @@
 									<ul class="nav">
 										<c:forEach var="key" items="${list}" varStatus="s">
 											<!-- <li class="active"> 某一项展开-->
-											<li <c:if test="${s.index==0}">class="active"</c:if>><a
-												href="javascript:void(0)"
-												<c:if test="${s.index==0}">class="active"</c:if>> <c:if
-														test="${s.index==0}">
+											<li <c:if test="${s.index==0}"> class="active" </c:if> nav-n="${key.name},${key.name},${key.resUrl}?id=${key.id}">
+												<a href="javascript:void(0)"
+													<c:if test="${s.index==0}">
+														class="active"
+													</c:if>> 
+													<c:if test="${s.index==0}">
 														<i class="fa fa-dashboard icon"> <b class="bg-danger"></b>
 														</i>
-													</c:if> <c:if test="${s.index==1}">
-														<i class="fa fa-pencil-square icon"> <b
-															class="bg-warning"></b>
+													</c:if> 
+													<c:if test="${s.index==1}">
+														<i class="fa fa-pencil-square icon"> <b class="bg-warning"></b>
 														</i>
-													</c:if> <c:if test="${s.index==2}">
+													</c:if> 
+													<c:if test="${s.index==2}">
 														<i class="fa fa-columns icon"> <b class="bg-primary"></b>
 														</i>
-													</c:if> <c:if test="${s.index==3}">
+													</c:if> 
+													<c:if test="${s.index==3}">
 														<i class="fa fa-book icon"> <b class="bg-info"></b>
 														</i>
-													</c:if> <c:if test="${s.index==4}">
+													</c:if>
+													<c:if test="${s.index==4}">
 														<i class="fa fa-th-list icon"> <b class="bg-success"></b>
 														</i>
-													</c:if> <span class="pull-right"> <i
+													</c:if> 
+													
+													<span class="pull-right"> <i
 														class="fa fa-angle-down text"></i> <i
 														class="fa fa-angle-up text-active"></i>
-												</span> <span>${key.name}</span>
-											</a>
-
+													</span> 
+													<span>${key.name}</span>
+												</a>
+<!--
 												<ul class="nav lt">
 													<c:forEach var="kc" items="${key.children}">
 														<li class="active"><a
@@ -230,7 +244,9 @@
 															class="active" nav-n="${key.name},${kc.name},${kc.resUrl}?id=${kc.id}"> <i class="fa fa-angle-right"></i> <span>${kc.name}</span>
 														</a></li>
 													</c:forEach>
-												</ul></li>
+												</ul>
+-->
+											</li>
 										</c:forEach>
 									</ul>
 								</nav>

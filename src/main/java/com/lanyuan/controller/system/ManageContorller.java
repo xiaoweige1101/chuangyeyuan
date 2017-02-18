@@ -17,12 +17,21 @@ public class ManageContorller extends BaseController {
 	@Inject
 	private RoomMapper roomMapper;
 
+	/**********房间管理************/
 	@RequestMapping("/room/list")
-	public String list(Model model) throws Exception {
+	public String listRoom(Model model) throws Exception {
 		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/manage/list";
+		return Common.BACKGROUND_PATH + "/system/manage/room/list";
 	}
 	
+	
+	
+	/**********租客管理************/
+	@RequestMapping("/guest/list")
+	public String listGuest(Model model) throws Exception {
+		model.addAttribute("res", findByRes());
+		return Common.BACKGROUND_PATH + "/system/manage/guest/list";
+	}
 	
 	
 }

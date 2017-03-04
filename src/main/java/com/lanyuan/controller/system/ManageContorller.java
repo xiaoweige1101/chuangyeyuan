@@ -14,6 +14,7 @@ import com.lanyuan.entity.ResUserFormMap;
 import com.lanyuan.entity.UserFormMap;
 import com.lanyuan.entity.UserGroupsFormMap;
 import com.lanyuan.mapper.RoomMapper;
+import com.lanyuan.plugin.PageView;
 import com.lanyuan.util.Common;
 
 @Controller
@@ -28,6 +29,18 @@ public class ManageContorller extends BaseController {
 	public String listBuilding(Model model) throws Exception {
 		model.addAttribute("res", findByRes());
 		return Common.BACKGROUND_PATH + "/system/manage/building/list";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/building/findByPage")
+	public PageView findByPage( String pageNow,
+			String pageSize,String column,String sort) throws Exception {
+		UserFormMap userFormMap = getFormMap(UserFormMap.class);
+		userFormMap=toFormMap(userFormMap, pageNow, pageSize,userFormMap.getStr("orderby"));
+		userFormMap.put("column", column);
+		userFormMap.put("sort", sort);
+//        pageView.setRecords(userMapper.findUserPage(userFormMap));//不调用默认分页,调用自已的mapper中findUserPage
+        return pageView;
 	}
 	
 	@RequestMapping("/building/addUI")

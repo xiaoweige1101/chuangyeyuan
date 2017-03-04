@@ -41,7 +41,7 @@ $(function() {
 			name : "下次交房租日期"
 		}
 		],
-		jsonUrl : rootPath + '/role/findByPage.shtml',
+		jsonUrl : rootPath + '/manage/building/findByPage.shtml',
 		dymCol:true,
 		checkbox : true
 	});

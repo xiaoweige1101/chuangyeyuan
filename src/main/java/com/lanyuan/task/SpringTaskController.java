@@ -44,7 +44,7 @@ public class SpringTaskController {
 	 * 
 	 * @throws Exception
 	 */
-	@Scheduled(cron = "1 * *  * * ? ")
+//	@Scheduled(cron = "1 * *  * * ? ")
 	public void task() throws Exception {
 		ServerInfoFormMap usage = SystemInfo.usage(new Sigar());
 		String cpuUsage = usage.get("cpuUsage")+"";// CPU使用率

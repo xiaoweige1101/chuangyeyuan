@@ -3,7 +3,7 @@ package com.lanyuan.mapper;
 import com.lanyuan.entity.RoomFormMap;
 import com.lanyuan.mapper.base.BaseMapper;
 
-public interface RoomMapper extends BaseMapper{
+public interface Cyy_buildingUserMapper extends BaseMapper{
 	public RoomFormMap getById(int id);
 	
 	public RoomFormMap getByRoomNum(String roomNum);

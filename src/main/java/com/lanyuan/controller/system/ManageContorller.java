@@ -13,7 +13,7 @@ import com.lanyuan.controller.index.BaseController;
 import com.lanyuan.entity.ResUserFormMap;
 import com.lanyuan.entity.UserFormMap;
 import com.lanyuan.entity.UserGroupsFormMap;
-import com.lanyuan.mapper.RoomMapper;
+import com.lanyuan.mapper.Cyy_roomMapper;
 import com.lanyuan.plugin.PageView;
 import com.lanyuan.util.Common;
 
@@ -22,7 +22,7 @@ import com.lanyuan.util.Common;
 public class ManageContorller extends BaseController {
 	
 	@Inject
-	private RoomMapper roomMapper;
+	private Cyy_roomMapper roomMapper;
 	
 	/**********大楼管理*********/
 	@RequestMapping("/building/list")

@@ -10,10 +10,150 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-01-31 10:32:19
+Date: 2017-03-04 13:15:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for cyy_budget
+-- ----------------------------
+DROP TABLE IF EXISTS `cyy_budget`;
+CREATE TABLE `cyy_budget` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `guestId` int(11) DEFAULT NULL,
+  `roomId` int(11) DEFAULT NULL,
+  `waterMoney` int(11) DEFAULT NULL,
+  `electMoney` int(11) DEFAULT NULL,
+  `networkMoney` int(11) DEFAULT NULL,
+  `rentMoney` int(11) DEFAULT NULL,
+  `totalMoney` int(11) DEFAULT NULL,
+  `rentStartDate` date DEFAULT NULL,
+  `rentEntEndDate` date DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `PK_budget_guestId` (`guestId`),
+  KEY `PK_budget_roomId` (`roomId`),
+  KEY `PK_budget_userId` (`userId`),
+  CONSTRAINT `PK_budget_guestId` FOREIGN KEY (`guestId`) REFERENCES `cyy_guest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `PK_budget_roomId` FOREIGN KEY (`roomId`) REFERENCES `cyy_room` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `PK_budget_userId` FOREIGN KEY (`userId`) REFERENCES `ly_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cyy_budget
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cyy_building
+-- ----------------------------
+DROP TABLE IF EXISTS `cyy_building`;
+CREATE TABLE `cyy_building` (
+  `id` int(48) NOT NULL AUTO_INCREMENT,
+  `buildingName` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cyy_building
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cyy_building_user
+-- ----------------------------
+DROP TABLE IF EXISTS `cyy_building_user`;
+CREATE TABLE `cyy_building_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uId` int(11) DEFAULT NULL,
+  `buildingId` int(11) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `PK_bu_buildingId` (`buildingId`),
+  KEY `PK_userId` (`uId`),
+  CONSTRAINT `PK_bu_buildingId` FOREIGN KEY (`buildingId`) REFERENCES `cyy_building` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `PK_userId` FOREIGN KEY (`uId`) REFERENCES `ly_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cyy_building_user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cyy_guest
+-- ----------------------------
+DROP TABLE IF EXISTS `cyy_guest`;
+CREATE TABLE `cyy_guest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `IDNo` varchar(64) DEFAULT NULL,
+  `name` varchar(64) DEFAULT NULL,
+  `sex` varchar(32) DEFAULT NULL,
+  `guranteeMoney` int(11) DEFAULT NULL,
+  `guranteeMoneyTakeInDate` date DEFAULT NULL,
+  `guranteeMoneyTakeOutDate` date DEFAULT NULL,
+  `guranteeMoneyState` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cyy_guest
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cyy_room
+-- ----------------------------
+DROP TABLE IF EXISTS `cyy_room`;
+CREATE TABLE `cyy_room` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `buildingId` int(11) DEFAULT NULL,
+  `roomName` varchar(64) DEFAULT NULL,
+  `roomPrice` int(11) DEFAULT NULL,
+  `waterRecord` int(11) DEFAULT NULL,
+  `electRecord` int(11) DEFAULT NULL,
+  `lastBudgetId` int(11) DEFAULT NULL,
+  `desc` varchar(256) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `PK_buildingId` (`buildingId`),
+  CONSTRAINT `PK_buildingId` FOREIGN KEY (`buildingId`) REFERENCES `cyy_building` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cyy_room
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cyy_room_live_record
+-- ----------------------------
+DROP TABLE IF EXISTS `cyy_room_live_record`;
+CREATE TABLE `cyy_room_live_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roomId` int(11) DEFAULT NULL,
+  `guestId` int(11) DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `PK_roomId` (`roomId`),
+  KEY `PK_guestId` (`guestId`),
+  CONSTRAINT `PK_guestId` FOREIGN KEY (`guestId`) REFERENCES `cyy_guest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `PK_roomId` FOREIGN KEY (`roomId`) REFERENCES `cyy_room` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cyy_room_live_record
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for ly_buttom
@@ -75,15 +215,17 @@ CREATE TABLE `ly_resources` (
   `ishide` int(3) DEFAULT '0',
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ly_resources
 -- ----------------------------
 INSERT INTO `ly_resources` VALUES ('1', '主页', '0', 'homepage', '0', '/homepage/homepage.shtml', '0', 'fa-tag', '0', '主页');
-INSERT INTO `ly_resources` VALUES ('2', '房间管理', '0', 'roomManagement', '0', '/manage/roon.shtml', '0', 'fa-tag', '0', '房间管理');
-INSERT INTO `ly_resources` VALUES ('3', '租客管理', '0', 'guestManagement', '0', '/manage/guest.shtml', '0', 'fa-tag', '0', '房客管理');
-INSERT INTO `ly_resources` VALUES ('4', '操作日志管理', '0', 'ly_log', '0', '/log/list.shtml', '20', 'fa-picture-o', '0', '操作日志管理');
+INSERT INTO `ly_resources` VALUES ('2', '大楼管理', '0', 'buildManagement', '0', '/manage/building/list.shtml', '0', 'fa-tag', '0', '大楼管理');
+INSERT INTO `ly_resources` VALUES ('3', '房间管理', '0', 'roomManagement', '0', '/manage/room/list.shtml', '0', 'fa-tag', '0', '房间管理');
+INSERT INTO `ly_resources` VALUES ('4', '租客管理', '0', 'guestManagement', '0', '/manage/guest/list.shtml', '0', 'fa-tag', '0', '房客管理');
+INSERT INTO `ly_resources` VALUES ('5', '账单管理', '0', 'budgetManagement', '0', '/manage/budget/list.shtml', '0', 'fa-tag', '0', '账单管理');
+INSERT INTO `ly_resources` VALUES ('6', '操作日志管理', '0', 'ly_log', '0', '/log/list.shtml', '0', 'fa-tag', '0', '操作日志管理');
 
 -- ----------------------------
 -- Table structure for ly_res_user
@@ -102,6 +244,8 @@ INSERT INTO `ly_res_user` VALUES ('1', '3');
 INSERT INTO `ly_res_user` VALUES ('2', '3');
 INSERT INTO `ly_res_user` VALUES ('3', '3');
 INSERT INTO `ly_res_user` VALUES ('4', '3');
+INSERT INTO `ly_res_user` VALUES ('5', '3');
+INSERT INTO `ly_res_user` VALUES ('6', '3');
 
 -- ----------------------------
 -- Table structure for ly_role
@@ -139,38 +283,11 @@ CREATE TABLE `ly_server_info` (
   `operTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `mark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ly_server_info
 -- ----------------------------
-INSERT INTO `ly_server_info` VALUES ('5', '18', '40', '49', '40', '71', '40', '121261494@qq.com', '2015-04-25 18:07:02', '<font color=\"red\">JVM当前：49%,超出预设值 40%<br>内存当前：71%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('6', '3', '40', '50', '40', '71', '40', '121261494@qq.com', '2015-04-25 18:08:03', '<font color=\"red\">JVM当前：50%,超出预设值 40%<br>内存当前：71%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('7', '5', '40', '50', '40', '70', '40', '121261494@qq.com', '2015-04-25 18:09:02', '<font color=\"red\">JVM当前：50%,超出预设值 40%<br>内存当前：70%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('8', '5', '40', '52', '40', '69', '40', '121261494@qq.com', '2015-04-25 18:10:03', '<font color=\"red\">JVM当前：52%,超出预设值 40%<br>内存当前：69%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('9', '2', '40', '52', '40', '68', '40', '121261494@qq.com', '2015-04-25 18:11:02', '<font color=\"red\">JVM当前：52%,超出预设值 40%<br>内存当前：68%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('10', '7', '40', '53', '40', '67', '40', '121261494@qq.com', '2015-04-25 18:12:02', '<font color=\"red\">JVM当前：53%,超出预设值 40%<br>内存当前：67%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('11', '5', '40', '54', '40', '67', '40', '121261494@qq.com', '2015-04-25 18:13:02', '<font color=\"red\">JVM当前：54%,超出预设值 40%<br>内存当前：67%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('12', '16', '40', '55', '40', '66', '40', '121261494@qq.com', '2015-04-25 18:14:02', '<font color=\"red\">JVM当前：55%,超出预设值 40%<br>内存当前：66%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('13', '5', '40', '56', '40', '65', '40', '121261494@qq.com', '2015-04-25 18:15:02', '<font color=\"red\">JVM当前：56%,超出预设值 40%<br>内存当前：65%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('14', '8', '40', '57', '40', '64', '40', '121261494@qq.com', '2015-04-25 18:16:02', '<font color=\"red\">JVM当前：57%,超出预设值 40%<br>内存当前：64%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('15', '3', '40', '58', '40', '63', '40', '121261494@qq.com', '2015-04-25 18:17:02', '<font color=\"red\">JVM当前：58%,超出预设值 40%<br>内存当前：63%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('16', '6', '40', '59', '40', '62', '40', '121261494@qq.com', '2015-04-25 18:18:03', '<font color=\"red\">JVM当前：59%,超出预设值 40%<br>内存当前：62%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('17', '1', '40', '60', '40', '61', '40', '121261494@qq.com', '2015-04-25 18:19:02', '<font color=\"red\">JVM当前：60%,超出预设值 40%<br>内存当前：61%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('18', '5', '40', '61', '40', '61', '40', '121261494@qq.com', '2015-04-25 18:20:02', '<font color=\"red\">JVM当前：61%,超出预设值 40%<br>内存当前：61%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('19', '5', '40', '38', '40', '61', '40', '121261494@qq.com', '2015-04-25 18:21:02', '<font color=\"red\">内存当前：61%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('20', '5', '40', '39', '40', '60', '40', '121261494@qq.com', '2015-04-25 18:22:02', '<font color=\"red\">内存当前：60%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('21', '4', '40', '40', '40', '59', '40', '121261494@qq.com', '2015-04-25 18:23:02', '<font color=\"red\">内存当前：59%,超出预设值  40%</font>');
-INSERT INTO `ly_server_info` VALUES ('22', '32', '80', '41', '80', '81', '80', '121261494@qq.com', '2015-04-26 01:43:05', '<font color=\"red\">内存当前：81%,超出预设值  80%</font>');
-INSERT INTO `ly_server_info` VALUES ('23', '55', '80', '55', '80', '81', '80', '121261494@qq.com', '2015-04-26 01:50:03', '<font color=\"red\">内存当前：81%,超出预设值  80%</font>');
-INSERT INTO `ly_server_info` VALUES ('24', '13', '80', '53', '80', '81', '80', '121261494@qq.com', '2015-04-26 01:59:08', '<font color=\"red\">内存当前：81%,超出预设值  80%</font>');
-INSERT INTO `ly_server_info` VALUES ('25', '85', '80', '58', '80', '72', '80', '121261494@qq.com', '2015-04-26 02:46:06', '<font color=\"red\">CPU当前：85%,超出预设值  80%<br></font>');
-INSERT INTO `ly_server_info` VALUES ('26', '34', '80', '59', '80', '81', '80', '121261494@qq.com', '2015-04-27 00:29:06', '<font color=\"red\">内存当前：81%,超出预设值  80%</font>');
-INSERT INTO `ly_server_info` VALUES ('27', '92', '80', '47', '80', '64', '80', '121261494@qq.com', '2015-04-27 00:44:07', '<font color=\"red\">CPU当前：92%,超出预设值  80%<br></font>');
-INSERT INTO `ly_server_info` VALUES ('28', '85', '80', '49', '80', '68', '80', '121261494@qq.com', '2015-04-27 23:38:04', '<font color=\"red\">CPU当前：85%,超出预设值  80%<br></font>');
-INSERT INTO `ly_server_info` VALUES ('29', '94', '80', '69', '80', '73', '80', '121261494@qq.com', '2015-04-28 01:35:03', '<font color=\"red\">CPU当前：94%,超出预设值  80%<br></font>');
-INSERT INTO `ly_server_info` VALUES ('30', '6', '80', '43', '80', '87', '80', '121261494@qq.com', '2015-05-09 00:00:08', '<font color=\"red\">内存当前：87%,超出预设值  80%</font>');
-INSERT INTO `ly_server_info` VALUES ('31', '88', '80', '59', '80', '87', '80', '121261494@qq.com', '2015-05-09 00:01:14', '<font color=\"red\">CPU当前：88%,超出预设值  80%<br>内存当前：87%,超出预设值  80%</font>');
 
 -- ----------------------------
 -- Table structure for ly_user
@@ -208,29 +325,14 @@ CREATE TABLE `ly_userlogin` (
   `loginIP` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ly_user_loginlist` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ly_userlogin
 -- ----------------------------
-INSERT INTO `ly_userlogin` VALUES ('143', '3', 'admin', '2017-01-26 17:01:10', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('144', '3', 'admin', '2017-01-28 21:44:45', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('145', '3', 'admin', '2017-01-28 22:08:24', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('146', '3', 'admin', '2017-01-29 17:06:36', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('147', '3', 'admin', '2017-01-29 22:52:14', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('148', '3', 'admin', '2017-01-29 22:54:13', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('149', '3', 'admin', '2017-01-29 23:06:52', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('150', '3', 'admin', '2017-01-30 19:45:05', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('151', '3', 'admin', '2017-01-30 20:11:47', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('152', '3', 'admin', '2017-01-30 21:36:51', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('153', '3', 'admin', '2017-01-30 21:39:55', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('154', '3', 'admin', '2017-01-30 21:41:07', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('155', '3', 'admin', '2017-01-30 21:42:05', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('156', '3', 'admin', '2017-01-30 21:51:07', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('157', '3', 'admin', '2017-01-30 21:51:27', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('158', '3', 'admin', '2017-01-31 10:16:45', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('159', '3', 'admin', '2017-01-31 10:19:55', '127.0.0.1');
-INSERT INTO `ly_userlogin` VALUES ('160', '3', 'admin', '2017-01-31 10:30:49', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('1', '3', 'admin', '2017-03-04 13:03:42', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('2', '3', 'admin', '2017-03-04 13:04:40', '127.0.0.1');
+INSERT INTO `ly_userlogin` VALUES ('3', '3', 'admin', '2017-03-04 13:05:29', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for ly_user_role

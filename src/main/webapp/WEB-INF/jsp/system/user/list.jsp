@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/system/user/list.js"></script>
 	<div class="m-b-md">
+<!-- 	
 		<form class="form-inline" role="form" id="searchForm"
 			name="searchForm">
 			<div class="form-group">
@@ -15,6 +16,7 @@
 			<a href="javascript:void(0)" class="btn btn-warning" id="callback_test">测试表格回调函数</a>
 			<a href="javascript:grid.exportData('/user/export.shtml')" class="btn btn-info" id="search">导出excel</a>
 		</form>
+-->
 	</div>
 	<header class="panel-heading">
 	<div class="doc-buttons">

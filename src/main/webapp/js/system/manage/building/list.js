@@ -7,38 +7,28 @@ $(function() {
 			colkey : "id",
 			name : "id",
 			width : "50px",
-			hide : true
+			isSort: true
+//			hide : true
 		}, {
-			colkey : "roomNum",
-			name : "房间号"
+			colkey : "buildingName",
+			name : "大楼名称",
+			width : "100px"
 		}, {
-			colkey : "beginDate",
-			name : "入住日期",
+			colkey: "desc",
+			name : "备注",
+			width : "200px"
+		}, {
+			colkey: "partner",
+			name : "合伙人",
+			width : "100px"
+		}, {
+			colkey : "createTime",
+			name : "创建时间",
 			width : "100px",
-		}, {
-			colkey : "roomRate",
-			name : "房租"
-		}, {
-			colkey : "returnableDeposit",
-			name : "押金"
-		}, {
-			colkey : "waterRecord",
-			name : "水费"
-		}, {
-			colkey : "electricRecord",
-			name : "电费"
-		}, {
-			colkey : "networkRecord",
-			name : "网费"
-		}, {
-			colkey : "contractPeriod",
-			name : "合同期"
-		}, {
-			colkey : "description",
-			name : "备注"
-		}, {
-			colkey : "nextChargeDate",
-			name : "下次交房租日期"
+			isSort:true,
+			renderData : function(rowindex,data, rowdata, column) {
+				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+			}
 		}
 		],
 		jsonUrl : rootPath + '/manage/building/findByPage.shtml',
@@ -51,20 +41,20 @@ $(function() {
 			data : searchParams
 		});
 	});
-	$("#addRole").click("click", function() {
-		addRole();
+	$("#addBuilding").click("click", function() {
+		addBuilding();
 	});
-	$("#editRole").click("click", function() {
-		editRole();
+	$("#editBuilding").click("click", function() {
+		editBuilding();
 	});
-	$("#delRole").click("click", function() {
-		delRole();
+	$("#delBuilding").click("click", function() {
+		delBuilding();
 	});
 	$("#permissions").click("click", function() {
 		permissions();
 	});
 });
-function editRole() {
+function editBuilding() {
 	var cbox = grid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
 		layer.msg("只能选中一个");
@@ -74,7 +64,7 @@ function editRole() {
 		title : "编辑",
 		type : 2,
 		area : [ "600px", "60%" ],
-		content : rootPath + '/role/editUI.shtml?id=' + cbox
+		content : rootPath + '/manage/building/editUI.shtml?id=' + cbox
 	});
 }
 function permissions() {
@@ -91,22 +81,22 @@ function permissions() {
 		content : url
 	});
 }
-function addRole() {
+function addBuilding() {
 	pageii = layer.open({
 		title : "新增",
 		type : 2,
 		area : [ "600px", "60%" ],
-		content : rootPath + '/role/addUI.shtml'
+		content : rootPath + '/manage/building/addUI.shtml'
 	});
 }
-function delRole() {
+function delBuilding() {
 	var cbox = grid.getSelectedCheckbox();
 	if (cbox == "") {
 		layer.msg("请选择删除项！！");
 		return;
 	}
 	layer.confirm('是否删除？', function(index) {
-		var url = rootPath + '/role/deleteEntity.shtml';
+		var url = rootPath + '/manage/building/deleteEntity.shtml';
 		var s = CommnUtil.ajax(url, {
 			ids : cbox.join(",")
 		}, "json");

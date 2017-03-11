@@ -47,6 +47,7 @@ public class PagePlugin implements Interceptor {
 	public final static Logger logger = Logger.getLogger(PagePlugin.class);
 	private static String dialect = null;//数据库类型
 	private static String pageSqlId = ""; // mybaits的数据库xml映射文件中需要拦截的ID(正则匹配)
+	
 	@SuppressWarnings("rawtypes")
 	public Object intercept(Invocation ivk) throws Throwable {
 		if (ivk.getTarget() instanceof RoutingStatementHandler) {
@@ -148,6 +149,7 @@ public class PagePlugin implements Interceptor {
 			String countSql = "";
 			try {
 				 countSql = "select count(1) " +removeOrderBys(suffixStr(sql));
+				 logger.info("countSQL:" + countSql);
 				 countStmt = connection.prepareStatement(countSql);
 		            BoundSql countBS = new BoundSql(mappedStatement.getConfiguration(),countSql.toString(),boundSql.getParameterMappings(),boundSql.getParameterObject());    
 		            Plugin.setParameters(countStmt,mappedStatement,countBS,boundSql.getParameterObject());    
@@ -186,8 +188,10 @@ public class PagePlugin implements Interceptor {
 	 */
 	public static String suffixStr(String toSql) {
 		toSql =getStringNoBlank(toSql);
-		if(StringUtils.isBlank(source_sql))
-		source_sql = toSql;
+		if(StringUtils.isBlank(source_sql)) {
+			source_sql = toSql;
+		}
+
 		toSql=toSql.toLowerCase();
 		int sun = toSql.indexOf(" from ");
 		String s1 = toSql.substring(0, sun);
@@ -195,10 +199,14 @@ public class PagePlugin implements Interceptor {
 			return suffixStr(toSql.substring(sun+5));
 		}else{
 			toSql = toSql.substring(sun);
-			source_sql=source_sql.substring(source_sql.length()-toSql.length());
+			if (source_sql.length() >= toSql.length()) {
+				source_sql=source_sql.substring(source_sql.length()-toSql.length());
+			}
 		}
 		return source_sql;
 	}
+	
+	
 	public static void main(String[] args) {
 		String sql="  select "+
 		 "	articleNo "+

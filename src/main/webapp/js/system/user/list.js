@@ -37,7 +37,8 @@ $(function() {
 			name : "操作",
 			renderData : function( rowindex ,data, rowdata, colkeyn) {
 				return "测试渲染函数";
-			}
+			},
+			hide : true
 		} ],
 		jsonUrl : rootPath + '/user/findByPage.shtml',
 		dymCol:true,

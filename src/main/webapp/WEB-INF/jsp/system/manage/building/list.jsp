@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/system/manage/room/list.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/system/manage/building/list.js"></script>
 
 	<header class="panel-heading">
 		<div class="doc-buttons">

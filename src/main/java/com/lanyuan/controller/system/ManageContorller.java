@@ -1,5 +1,7 @@
 package com.lanyuan.controller.system;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
+import com.lanyuan.entity.Cyy_buildingFormMap;
 import com.lanyuan.entity.ResUserFormMap;
 import com.lanyuan.entity.UserFormMap;
 import com.lanyuan.entity.UserGroupsFormMap;
+import com.lanyuan.mapper.Cyy_buildingMapper;
 import com.lanyuan.mapper.Cyy_roomMapper;
 import com.lanyuan.plugin.PageView;
 import com.lanyuan.util.Common;
@@ -22,7 +26,19 @@ import com.lanyuan.util.Common;
 public class ManageContorller extends BaseController {
 	
 	@Inject
+	private Cyy_buildingMapper buildingMapper;
+	
+	@Inject
 	private Cyy_roomMapper roomMapper;
+	
+	
+	/*****************主页****************/
+	@RequestMapping("/homepage")
+	public String homePage(Model model) throws Exception {
+		
+		return Common.BACKGROUND_PATH + "/system/homepage/homepage";
+	}
+	
 	
 	/**********大楼管理*********/
 	@RequestMapping("/building/list")
@@ -33,13 +49,23 @@ public class ManageContorller extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping("/building/findByPage")
-	public PageView findByPage( String pageNow,
-			String pageSize,String column,String sort) throws Exception {
-		UserFormMap userFormMap = getFormMap(UserFormMap.class);
-		userFormMap=toFormMap(userFormMap, pageNow, pageSize,userFormMap.getStr("orderby"));
-		userFormMap.put("column", column);
-		userFormMap.put("sort", sort);
-//        pageView.setRecords(userMapper.findUserPage(userFormMap));//不调用默认分页,调用自已的mapper中findUserPage
+	public PageView findByPage( String pageNow, String pageSize,String column,String sort) throws Exception {
+		Cyy_buildingFormMap buildingFormMap = getFormMap(Cyy_buildingFormMap.class);
+		buildingFormMap=toFormMap(buildingFormMap, pageNow, pageSize, buildingFormMap.getStr("orderby"));
+
+		try {
+			buildingFormMap.put("column", column);
+			buildingFormMap.put("sort", sort);
+			List<Cyy_buildingFormMap> buildingList = buildingMapper.getBuildingPage(buildingFormMap);
+			//添加合伙人信息
+			
+			
+			pageView.setRecords(buildingList);
+			pageView.setOrderby(sort);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
         return pageView;
 	}
 	

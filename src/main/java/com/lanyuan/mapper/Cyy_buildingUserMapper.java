@@ -1,14 +1,14 @@
 package com.lanyuan.mapper;
 
-import com.lanyuan.entity.RoomFormMap;
+import java.util.List;
+
+import com.lanyuan.entity.Cyy_buildingUserFormMap;
 import com.lanyuan.mapper.base.BaseMapper;
 
 public interface Cyy_buildingUserMapper extends BaseMapper{
-	public RoomFormMap getById(int id);
+	public Cyy_buildingUserFormMap getById(int id);
 	
-	public RoomFormMap getByRoomNum(String roomNum);
+	public List<Cyy_buildingUserFormMap> getByBuildingId(int buildingId);
 	
-	public void addOrUpdateByRoomNum(RoomFormMap roomFormMap);
-	
-	public void deleteByRoomNum(String roomNum);
+	public void deleteById(int id);
 }

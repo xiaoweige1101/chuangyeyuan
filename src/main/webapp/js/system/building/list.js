@@ -18,7 +18,7 @@ $(function() {
 			name : "备注",
 			width : "200px"
 		}, {
-			colkey: "partner",
+			colkey: "partners",
 			name : "合伙人",
 			width : "100px"
 		}, {

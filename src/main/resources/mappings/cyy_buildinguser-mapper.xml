@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanyuan.mapper.Cyy_buildingUserMapper">
+	<!--mybatis ehcache缓存配置 -->
+	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 <cache type="org.mybatis.caches.ehcache.LoggingEhcache" 
+		/> -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+	<!-- 以下与实体类的中字段一致 -->
+
+	<select id="getById" resultType="com.lanyuan.entity.Cyy_buildingUserFormMap">
+		select * from chuangyeyuan.cyy_building_user where id = #{id} 
+	</select>
+	
+	<select id="getByBuildingId" resultType="com.lanyuan.entity.Cyy_buildingUserFormMap">
+		select b.buildingName as buildingName, u.accountName as accountName from chuangyeyuan.cyy_building b, chuangyeyuan.cyy_building_user bu, chuangyeyuan.ly_user u 
+		where b.id = #{id} and b.id = bu.buildingId and bu.uId = u.id 
+	</select>
+	
+	<delete id="deleteById">
+		delete from chuangyeyuan.cyy_building_user where id = #{id} 
+	</delete>
+
+</mapper>

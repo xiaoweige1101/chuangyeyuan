@@ -11,14 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
 import com.lanyuan.entity.Cyy_buildingFormMap;
+import com.lanyuan.entity.Cyy_buildingUserFormMap;
 import com.lanyuan.mapper.Cyy_buildingMapper;
-import com.lanyuan.mapper.Cyy_roomMapper;
+import com.lanyuan.mapper.Cyy_buildingUserMapper;
 import com.lanyuan.plugin.PageView;
 import com.lanyuan.util.Common;
 
@@ -32,7 +32,7 @@ public class ManageBuildingContorller extends BaseController {
 	private Cyy_buildingMapper buildingMapper;
 	
 	@Inject
-	private Cyy_roomMapper roomMapper;
+	private Cyy_buildingUserMapper buildingUserMapper;
 	
 	
 	//显示大楼列表UI
@@ -54,7 +54,16 @@ public class ManageBuildingContorller extends BaseController {
 			buildingFormMap.put("sort", sort);
 			List<Cyy_buildingFormMap> buildingList = buildingMapper.getBuildingPage(buildingFormMap);
 			//添加合伙人信息
-			
+			for (Cyy_buildingFormMap building : buildingList) {
+				List<Cyy_buildingUserFormMap> buildingUserList =  buildingUserMapper.getByBuildingId(building.getInt("id"));
+				String partners = "";
+				
+				for (Cyy_buildingUserFormMap bu : buildingUserList) {
+					partners += bu.getStr("accountName");
+				}
+				
+				building.set("partners", partners);
+			}
 			
 			pageView.setRecords(buildingList);
 			pageView.setOrderby(sort);
@@ -100,28 +109,9 @@ public class ManageBuildingContorller extends BaseController {
 	public String deleteEntity() throws Exception {
 		String[] ids = getParaValues("ids");
 		for (String id : ids) {
-//			userMapper.deleteByAttribute("userId", id, UserGroupsFormMap.class);
-//			userMapper.deleteByAttribute("userId", id, ResUserFormMap.class);
-//			userMapper.deleteByAttribute("id", id, UserFormMap.class);
+			buildingMapper.deleteById(Integer.parseInt(id));
 		}
 		return "success";
 	}
 
-	/**********房间管理************/
-	@RequestMapping("/room/list")
-	public String listRoom(Model model) throws Exception {
-		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/room/list";
-	}
-	
-	
-	
-	/**********租客管理************/
-	@RequestMapping("/guest/list")
-	public String listGuest(Model model) throws Exception {
-		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/guest/list";
-	}
-	
-	
 }

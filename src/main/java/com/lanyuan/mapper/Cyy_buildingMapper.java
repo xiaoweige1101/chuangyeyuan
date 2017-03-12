@@ -3,7 +3,6 @@ package com.lanyuan.mapper;
 import java.util.List;
 
 import com.lanyuan.entity.Cyy_buildingFormMap;
-import com.lanyuan.entity.RoomFormMap;
 import com.lanyuan.mapper.base.BaseMapper;
 
 public interface Cyy_buildingMapper extends BaseMapper {
@@ -16,4 +15,6 @@ public interface Cyy_buildingMapper extends BaseMapper {
 	public void addOrUpdateByBuildingName(Cyy_buildingFormMap buildingName);
 	
 	public void deleteByBuildingName(String buildingName);
+	
+	public void deleteById(int id);
 }

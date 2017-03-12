@@ -40,6 +40,13 @@ public class UserController extends BaseController {
 	@Inject
 	private UserMapper userMapper;
 	
+	/*****************主页****************/
+	@RequestMapping("/homepage")
+	public String homePage(Model model) throws Exception {
+		
+		return Common.BACKGROUND_PATH + "/system/homepage/homepage";
+	}
+	
 	@RequestMapping("list")
 	public String listUI(Model model) throws Exception {
 		model.addAttribute("res", findByRes());

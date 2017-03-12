@@ -35,7 +35,8 @@
 	  	</if>
 	  	
 	  	<if test="count==0">
-	  	
+	  		insert into chuangyeyuan.cyy_building(`buildingName`, `desc`, `createTime`, `updateTime`) 
+	  		values("${buildingName}", "${desc}", now(), now())  
 	  	</if>
 	</insert>
 	

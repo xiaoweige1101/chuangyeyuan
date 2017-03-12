@@ -31,7 +31,7 @@ $(function() {
 			}
 		}
 		],
-		jsonUrl : rootPath + '/manage/building/findByPage.shtml',
+		jsonUrl : rootPath + '/building/findByPage.shtml',
 		dymCol:true,
 		checkbox : true
 	});
@@ -64,7 +64,7 @@ function editBuilding() {
 		title : "编辑",
 		type : 2,
 		area : [ "600px", "60%" ],
-		content : rootPath + '/manage/building/editUI.shtml?id=' + cbox
+		content : rootPath + '/building/editUI.shtml?id=' + cbox
 	});
 }
 function permissions() {
@@ -85,8 +85,8 @@ function addBuilding() {
 	pageii = layer.open({
 		title : "新增",
 		type : 2,
-		area : [ "600px", "60%" ],
-		content : rootPath + '/manage/building/addUI.shtml'
+		area : [ "600px", "50%" ],
+		content : rootPath + '/building/addUI.shtml'
 	});
 }
 function delBuilding() {
@@ -96,7 +96,7 @@ function delBuilding() {
 		return;
 	}
 	layer.confirm('是否删除？', function(index) {
-		var url = rootPath + '/manage/building/deleteEntity.shtml';
+		var url = rootPath + '/building/deleteEntity.shtml';
 		var s = CommnUtil.ajax(url, {
 			ids : cbox.join(",")
 		}, "json");

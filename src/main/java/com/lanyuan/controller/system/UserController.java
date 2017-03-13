@@ -55,13 +55,17 @@ public class UserController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("findByPage")
-	public PageView findByPage( String pageNow,
-			String pageSize,String column,String sort) throws Exception {
-		UserFormMap userFormMap = getFormMap(UserFormMap.class);
-		userFormMap=toFormMap(userFormMap, pageNow, pageSize,userFormMap.getStr("orderby"));
-		userFormMap.put("column", column);
-		userFormMap.put("sort", sort);
-        pageView.setRecords(userMapper.findUserPage(userFormMap));//不调用默认分页,调用自已的mapper中findUserPage
+	public PageView findByPage( String pageNow, String pageSize,String column,String sort) throws Exception {
+		try {
+			UserFormMap userFormMap = getFormMap(UserFormMap.class);
+			userFormMap=toFormMap(userFormMap, pageNow, pageSize,userFormMap.getStr("orderby"));
+			userFormMap.put("column", column);
+			userFormMap.put("sort", sort);
+	        pageView.setRecords(userMapper.findUserPage(userFormMap));//不调用默认分页,调用自已的mapper中findUserPage
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
         return pageView;
 	}
 	

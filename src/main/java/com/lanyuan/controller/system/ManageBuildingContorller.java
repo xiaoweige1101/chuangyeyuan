@@ -59,7 +59,7 @@ public class ManageBuildingContorller extends BaseController {
 				String partners = "";
 				
 				for (Cyy_buildingUserFormMap bu : buildingUserList) {
-					partners += bu.getStr("accountName");
+					partners += " " + bu.getStr("accountName");
 				}
 				
 				building.set("partners", partners);

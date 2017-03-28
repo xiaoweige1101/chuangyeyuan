@@ -7,61 +7,61 @@
 		/> -->
 	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
 	<!-- 以下与实体类的中字段一致 -->
-<!-- 
-	<select id="getById" resultType="com.lanyuan.entity.RoomFormMap">
+
+	<select id="getById" resultType="com.lanyuan.entity.Cyy_roomFormMap">
 		select * from ly_room where id = #{id} 
 	</select>
 	
-	<select id="getByRoomNum" resultType="com.lanyuan.entity.RoomFormMap">
-		select * from ly_room where roomNum = #{roomNum} 
+	<select id="getRoomPage" resultType="com.lanyuan.entity.Cyy_roomFormMap">
+		select * from ly_room   
+		<if test="column != null">
+          order by ${column} ${sort}
+        </if>
 	</select>
 	
-	<insert id="addOrUpdateByRoomNum"  parameterType="com.lanyuan.entity.RoomFormMap">
+	<insert id="addOrUpdateByRoomName"  parameterType="com.lanyuan.entity.Cyy_roomFormMap">
 		<selectKey keyProperty="count" resultType="int" order="BEFORE">
-	    	select count(*) from ly_room where roomNum = #{roomNum} 
+	    	select count(*) from ly_room where roomName = #{roomName} 
 	  	</selectKey>
 	  	<if test="count > 0">
-	  		update ly_room set roomNum = #{roomNum} 
-	  		<if test="beginDate!=null and beginDate!=''">
-	  			,beginDate = #{beginDate}
+	  		update ly_room set id = #{id} 
+	  		<if test="buildingId!=null and buildingId!=''">
+	  			,buildingId = #{buildingId}
 	  		</if>
-	  		<if test="roomRate!=null and roomRate!=''">
-	  			,roomRate = #{roomRate}
+	  		<if test="roomName!=null and roomName!=''">
+	  			,roomName = #{roomName}
 	  		</if>
-	  		<if test="returnableDeposit!=null and returnableDeposit!=''">
-	  			,returnableDeposit = #{returnableDeposit}
+	  		<if test="roomPrice!=null and roomPrice!=''">
+	  			,roomPrice = #{roomPrice}
 	  		</if>
 	  		<if test="waterRecord!=null and waterRecord!=''">
 	  			,waterRecord = #{waterRecord}
 	  		</if>
-	  		<if test="electricRecord!=null and electricRecord!=''">
-	  			,electricRecord = #{electricRecord}
+	  		<if test="electRecord!=null and electRecord!=''">
+	  			,electRecord = #{electRecord}
 	  		</if>
-	  		<if test="networkRecord!=null and networkRecord!=''">
-	  			,networkRecord = #{networkRecord}
+	  		<if test="lastBudgetId!=null and lastBudgetId!=''">
+	  			,lastBudgetId = #{lastBudgetId}
 	  		</if>
-	  		<if test="contractPeriod!=null and contractPeriod!=''">
-	  			,contractPeriod = #{contractPeriod}
+	  		<if test="desc!=null and desc!=''">
+	  			,desc = #{desc}
 	  		</if>
-	  		<if test="description!=null and description!=''">
-	  			,description = #{description}
-	  		</if>
-	  		<if test="nextChargeDate!=null and nextChargeDate!=''">
-	  			,nextChargeDate = #{nextChargeDate}
+	  		<if test="createTime!=null and createTime!=''">
+	  			,createTime = #{createTime}
 	  		</if>
 	  		,updateTime = now() 
 	  	</if>
 	  
 		<if test="count==0">
-			insert into ly_room(roomNum, beginDate, roomRate, returnableDeposit, waterRecord, electricRecord,
-			networkRecord, contractPeriod, description, nextChargeDate, createTime, updateTime, ly_user_id) values(
-			#{roomNum}, #{beginDate}, #{roomRate}, #{returnableDeposit}, #{waterRecord}, #{electricRecord},
-			#{networkRecord}, #{contractPeriod}, #{description}, #{nextChargeDate}, #{createTime}, #{updateTime}, #{ly_user_id}) 
+			insert into ly_room(buildingId, roomName, roomPrice, waterRecord, electRecord, lastBudgetId, desc,
+			createTime, updateTime) values(
+			#{buildingId}, #{roomName}, #{roomPrice}, #{waterRecord}, #{electRecord}, #{lastBudgetId}, #{desc},
+			#{createTime}, now())
 		</if>
 	</insert>
 	
-	<delete id="deleteByRoomNum">
-		delete from ly_room where roomNum = #{roomNum} 
+	<delete id="deleteByRoomroomName">
+		delete from ly_room where roomName = #{roomName} 
 	</delete>
--->
+
 </mapper>

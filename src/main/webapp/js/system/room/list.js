@@ -9,9 +9,15 @@ $(function() {
 			width : "50px",
 			hide : true
 		}, {
-			colkey : "roomNum",
-			name : "房间号"
+			colkey : "roomName",
+			name : "房间名称"
 		}, {
+			colkey : "buildingName",
+			name : "所属大楼名称",
+			width : "100px"
+		},
+		
+		{
 			colkey : "beginDate",
 			name : "入住日期",
 			width : "100px",
@@ -41,7 +47,7 @@ $(function() {
 			name : "下次交房租日期"
 		}
 		],
-		jsonUrl : rootPath + '/role/findByPage.shtml',
+		jsonUrl : rootPath + '/room/findByPage.shtml',
 		dymCol:true,
 		checkbox : true
 	});

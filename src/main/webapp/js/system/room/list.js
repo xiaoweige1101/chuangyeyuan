@@ -21,33 +21,31 @@ $(function() {
 			name : "当前房客",
 			width : "100px"
 		}, {
-			colkey : "beginDate",
-			name : "入住日期",
+			colkey : "roomPrice",
+			name : "房租价格",
 			width : "100px",
 		}, {
-			colkey : "roomRate",
-			name : "每月房租"
+			colkey : "lastRent",
+			name : "上次收租金额",
+			width : "100px"
 		}, {
-			colkey : "returnableDeposit",
-			name : "押金"
+			colkey : "lastRentTime",
+			name : "上次收租时间",
+			width : "100px",
+			renderData : function(rowindex,data, rowdata, column) {
+				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+			}
 		}, {
-			colkey : "recentRateTime",
-			name : "上次交租时间"
+			colkey : "nextRentTime",
+			name : "下次交租时间",
+			width : "100px",
+			renderData : function(rowindex,data, rowdata, column) {
+				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+			}
 		}, {
-			colkey : "recentRateMoney",
-			name : "上次交租金额"
-		}, {
-			colkey : "nextChargeDate",
-			name : "下次交房租日期"
-		}, {
-			colkey : "waterRecord",
-			name : "水费"
-		}, {
-			colkey : "contractPeriod",
-			name : "合同期"
-		}, {
-			colkey : "description",
-			name : "备注"
+			colkey : "desc",
+			name : "描述",
+			width : "150px"
 		}
 		],
 		jsonUrl : rootPath + '/room/findByPage.shtml',

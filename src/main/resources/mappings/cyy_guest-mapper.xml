@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lanyuan.mapper.Cyy_roomMapper">
+<mapper namespace="com.lanyuan.mapper.Cyy_guestMapper">
 	<!--mybatis ehcache缓存配置 -->
 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 <cache type="org.mybatis.caches.ehcache.LoggingEhcache" 
 		/> -->
 	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
 	<!-- 以下与实体类的中字段一致 -->
 
-	<select id="getById" resultType="com.lanyuan.entity.Cyy_roomFormMap">
-		select * from cyy_room where id = #{id} 
+	<select id="getById" resultType="com.lanyuan.entity.Cyy_guestFormMap">
+		select * from cyy_guest where id = #{id} 
 	</select>
 	
-	<select id="getRoomPage" resultType="com.lanyuan.entity.Cyy_roomFormMap">
-		select * from cyy_room 
+	<select id="getRoomPage" resultType="com.lanyuan.entity.Cyy_guestFormMap">
+		select * from cyy_guest 
 		<if test="column != null">
           order by ${column} ${sort}
         </if>
 	</select>
 	
-	<insert id="addOrUpdateByRoomName"  parameterType="com.lanyuan.entity.Cyy_roomFormMap">
+	<insert id="addOrUpdateByRoomName"  parameterType="com.lanyuan.entity.Cyy_guestFormMap">
 		<selectKey keyProperty="count" resultType="int" order="BEFORE">
 	    	select count(*) from cyy_room where roomName = #{roomName} and buildingId = #{buildingId} 
 	  	</selectKey>
@@ -64,8 +64,8 @@
 		</if>
 	</insert>
 	
-	<delete id="deleteByRoomroomId">
-		delete from cyy_room where id = #{id} 
+	<delete id="deleteByGuestId">
+		delete from cyy_guest where id = #{id} 
 	</delete>
 
 </mapper>

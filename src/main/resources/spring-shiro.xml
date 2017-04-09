@@ -71,6 +71,8 @@
 			<value>
 			/favicon.ico = anon
     		/admin_files/** = anon
+    		/js/** = anon
+    		/css/** = anon
     		/fonts/** = anon
     		/404/** = anon
     		/error.jsp = anon

@@ -9,11 +9,11 @@
 	<!-- 以下与实体类的中字段一致 -->
 
 	<select id="getById" resultType="com.lanyuan.entity.Cyy_roomFormMap">
-		select * from ly_room where id = #{id} 
+		select * from cyy_room where id = #{id} 
 	</select>
 	
 	<select id="getRoomPage" resultType="com.lanyuan.entity.Cyy_roomFormMap">
-		select * from ly_room   
+		select * from cyy_room   
 		<if test="column != null">
           order by ${column} ${sort}
         </if>
@@ -21,10 +21,10 @@
 	
 	<insert id="addOrUpdateByRoomName"  parameterType="com.lanyuan.entity.Cyy_roomFormMap">
 		<selectKey keyProperty="count" resultType="int" order="BEFORE">
-	    	select count(*) from ly_room where roomName = #{roomName} 
+	    	select count(*) from cyy_room where roomName = #{roomName} 
 	  	</selectKey>
 	  	<if test="count > 0">
-	  		update ly_room set id = #{id} 
+	  		update cyy_room set id = #{id} 
 	  		<if test="buildingId!=null and buildingId!=''">
 	  			,buildingId = #{buildingId}
 	  		</if>
@@ -53,7 +53,7 @@
 	  	</if>
 	  
 		<if test="count==0">
-			insert into ly_room(buildingId, roomName, roomPrice, waterRecord, electRecord, lastBudgetId, desc,
+			insert into cyy_room(buildingId, roomName, roomPrice, waterRecord, electRecord, lastBudgetId, desc,
 			createTime, updateTime) values(
 			#{buildingId}, #{roomName}, #{roomPrice}, #{waterRecord}, #{electRecord}, #{lastBudgetId}, #{desc},
 			#{createTime}, now())
@@ -61,7 +61,7 @@
 	</insert>
 	
 	<delete id="deleteByRoomroomName">
-		delete from ly_room where roomName = #{roomName} 
+		delete from cyy_room where roomName = #{roomName} 
 	</delete>
 
 </mapper>

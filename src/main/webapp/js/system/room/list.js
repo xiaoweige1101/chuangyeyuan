@@ -10,41 +10,44 @@ $(function() {
 			hide : true
 		}, {
 			colkey : "roomName",
-			name : "房间名称"
+			name : "房间名称",
+			width : "100px"
 		}, {
 			colkey : "buildingName",
 			name : "所属大楼名称",
 			width : "100px"
-		},
-		
-		{
+		}, {
+			colkey : "guestName",
+			name : "当前房客",
+			width : "100px"
+		}, {
 			colkey : "beginDate",
 			name : "入住日期",
 			width : "100px",
 		}, {
 			colkey : "roomRate",
-			name : "房租"
+			name : "每月房租"
 		}, {
 			colkey : "returnableDeposit",
 			name : "押金"
 		}, {
+			colkey : "recentRateTime",
+			name : "上次交租时间"
+		}, {
+			colkey : "recentRateMoney",
+			name : "上次交租金额"
+		}, {
+			colkey : "nextChargeDate",
+			name : "下次交房租日期"
+		}, {
 			colkey : "waterRecord",
 			name : "水费"
-		}, {
-			colkey : "electricRecord",
-			name : "电费"
-		}, {
-			colkey : "networkRecord",
-			name : "网费"
 		}, {
 			colkey : "contractPeriod",
 			name : "合同期"
 		}, {
 			colkey : "description",
 			name : "备注"
-		}, {
-			colkey : "nextChargeDate",
-			name : "下次交房租日期"
 		}
 		],
 		jsonUrl : rootPath + '/room/findByPage.shtml',

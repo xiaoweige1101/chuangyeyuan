@@ -81,7 +81,7 @@ function editRole() {
 		title : "编辑",
 		type : 2,
 		area : [ "600px", "60%" ],
-		content : rootPath + '/role/editUI.shtml?id=' + cbox
+		content : rootPath + '/room/editUI.shtml?id=' + cbox
 	});
 }
 function permissions() {
@@ -103,7 +103,7 @@ function addRole() {
 		title : "新增",
 		type : 2,
 		area : [ "600px", "60%" ],
-		content : rootPath + '/role/addUI.shtml'
+		content : rootPath + '/room/addUI.shtml'
 	});
 }
 function delRole() {
@@ -113,7 +113,7 @@ function delRole() {
 		return;
 	}
 	layer.confirm('是否删除？', function(index) {
-		var url = rootPath + '/role/deleteEntity.shtml';
+		var url = rootPath + '/room/deleteEntity.shtml';
 		var s = CommnUtil.ajax(url, {
 			ids : cbox.join(",")
 		}, "json");

@@ -31,36 +31,27 @@ label[class^="btn btn-default"] {
 		action="${ctx}/room/addEntity.shtml">
 		<section class="panel panel-default">
 		<div class="panel-body">
-			<div class="form-group">
-				<div class="col-sm-3">
-					<label class="control-label">选择大楼</label>
-				</div>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入大楼名" name="userFormMap.userName" id="userName">
-				</div>
-			</div>
+			<div class="form-group" id="selBuilding" data-url="/building/getBuildingListDiv.shtml"></div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">房间名称</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc" placeholder="请输入房间名称" name="userFormMap.accountName" id="accountName">
+					<input type="text" class="form-control checkacc" placeholder="请输入房间名称" name="roomName" id="roomName">
 				</div>
 			</div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">房租</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc" placeholder="请输入房租" name="userFormMap.accountName" id="accountName">
+					<input type="text" class="form-control checkacc" placeholder="请输入房租" name="roomPrice" id="roomPrice">
 				</div>
 			</div>
-			<div class="line line-dashed line-lg pull-in"></div>
-			<div class="form-group" id="selRole" data-url="/role/selRole.shtml"></div>
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">描述</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" placeholder="请输入账号描述"
-						name="userFormMap.description" id="description">
+						name="desc" id="desc">
 				</div>
 			</div>
 		</div>

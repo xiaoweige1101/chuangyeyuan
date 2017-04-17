@@ -1,7 +1,7 @@
 //单独验证某一个input  class="checkpass"
-jQuery.validator.addMethod("checkacc", function(value, element) {
-	return this.optional(element)
-			|| ((value.length <= 30) && (value.length >= 3));
+jQuery.validator
+.addMethod("checkacc", function(value, element) {
+	return this.optional(element) || ((value.length <= 30) && (value.length >= 3));
 }, "账号由3至30位字符组合构成");
 $(function() {
 	$("form").validate({

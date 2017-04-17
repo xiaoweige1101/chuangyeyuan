@@ -2,6 +2,9 @@ package com.lanyuan.controller.system;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +17,7 @@ import com.lanyuan.controller.index.BaseController;
 import com.lanyuan.entity.Cyy_roomFormMap;
 import com.lanyuan.entity.UserFormMap;
 import com.lanyuan.entity.UserGroupsFormMap;
+import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
 import com.lanyuan.plugin.PageView;
 import com.lanyuan.service.ManageRoomService;
@@ -62,25 +66,17 @@ public class ManageRoomContorller extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping("addEntity")
-	@SystemLog(module="系统管理",methods="用户管理-新增用户")//凡需要处理业务逻辑的.都需要记录操作日志
+	@SystemLog(module="系统管理",methods="房间管理-新增房间")//凡需要处理业务逻辑的.都需要记录操作日志
 	@Transactional(readOnly=false)//需要事务操作必须加入此注解
-	public String addEntity(String txtGroupsSelect){
+	public String addEntity(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			UserFormMap userFormMap = getFormMap(UserFormMap.class);
-			userFormMap.put("txtGroupsSelect", txtGroupsSelect);
-			PasswordHelper passwordHelper = new PasswordHelper();
-			userFormMap.set("password","123456789");
-			passwordHelper.encryptPassword(userFormMap);
-//			userMapper.addEntity(userFormMap);//新增后返回新增信息
-			if (!Common.isEmpty(txtGroupsSelect)) {
-				String[] txt = txtGroupsSelect.split(",");
-				UserGroupsFormMap userGroupsFormMap = new UserGroupsFormMap();
-				for (String roleId : txt) {
-					userGroupsFormMap.put("userId", userFormMap.get("id"));
-					userGroupsFormMap.put("roleId", roleId);
-//					userMapper.addEntity(userGroupsFormMap);
-				}
-			}
+			String buildingName = request.getParameter("buildingName");
+			String roomName = request.getParameter("roomName");
+			String roomPrice = request.getParameter("roomPrice");
+			String desc = request.getParameter("desc");
+			manageRoomService.addRoom(buildingName, roomName, roomPrice, desc);
+		} catch (ParameterException e) {
+			throw new ParameterException("大楼名称和房间名称已经存在");
 		} catch (Exception e) {
 			 throw new SystemException("添加账号异常");
 		}

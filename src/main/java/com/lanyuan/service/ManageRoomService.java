@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lanyuan.entity.Cyy_buildingFormMap;
 import com.lanyuan.entity.Cyy_guestFormMap;
 import com.lanyuan.entity.Cyy_roomFormMap;
+import com.lanyuan.exception.ParameterException;
 import com.lanyuan.mapper.Cyy_buildingMapper;
 import com.lanyuan.mapper.Cyy_guestMapper;
 import com.lanyuan.mapper.Cyy_roomMapper;
@@ -46,6 +47,21 @@ public class ManageRoomService implements IManageRoomService {
 		}
 		
 		return roomList;
+	}
+
+	@Override
+	public void addRoom(String buildingName, String roomName, String roomPrice, String desc) throws ParameterException {
+		Cyy_roomFormMap room = roomMapper.getRoom(buildingName, roomName);
+		
+		if (room != null) {
+			throw new ParameterException("已经存在buildingName:" + buildingName + ", roomName:" + roomName);
+		}
+		
+		room = new Cyy_roomFormMap();
+		room.set("buildingName", buildingName);
+		room.set("roomName", roomName);
+		
+		roomMapper.addOrUpdateByRoomNum(room);
 	}
 	
 }

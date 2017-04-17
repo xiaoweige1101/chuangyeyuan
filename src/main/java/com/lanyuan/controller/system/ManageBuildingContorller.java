@@ -114,4 +114,13 @@ public class ManageBuildingContorller extends BaseController {
 		return "success";
 	}
 
+	//获取大楼列表页面
+	@RequestMapping("/getBuildingListDiv")
+	public String getBuildingListDiv(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		List<Cyy_buildingFormMap> buildingList = buildingMapper.getBuildingPage(null);
+		
+		model.addAttribute("buildingList", buildingList);
+		return Common.BACKGROUND_PATH + "/system/building/buildingListDiv";
+	}
+	
 }

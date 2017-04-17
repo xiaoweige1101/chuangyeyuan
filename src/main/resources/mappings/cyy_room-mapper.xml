@@ -12,6 +12,10 @@
 		select * from cyy_room where id = #{id} 
 	</select>
 	
+	<select id="getRoom" resultType="com.lanyuan.entity.Cyy_roomFormMap">
+		select * from cyy_room where buildingName=#{buildingName} and roomName=#{roomName} 
+	</select>
+	
 	<select id="getRoomPage" resultType="com.lanyuan.entity.Cyy_roomFormMap">
 		select * from cyy_room 
 		<if test="column != null">

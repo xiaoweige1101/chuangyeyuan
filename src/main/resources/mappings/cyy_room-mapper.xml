@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="getRoom" resultType="com.lanyuan.entity.Cyy_roomFormMap">
-		select * from cyy_room where buildingName=#{buildingName} and roomName=#{roomName} 
+		select * from cyy_room where buildingId=#{buildingId} and roomName="${roomName}"  
 	</select>
 	
 	<select id="getRoomPage" resultType="com.lanyuan.entity.Cyy_roomFormMap">
@@ -25,7 +25,7 @@
 	
 	<insert id="addOrUpdateByRoomName"  parameterType="com.lanyuan.entity.Cyy_roomFormMap">
 		<selectKey keyProperty="count" resultType="int" order="BEFORE">
-	    	select count(*) from cyy_room where roomName = #{roomName} and buildingId = #{buildingId} 
+	    	select count(*) from cyy_room where roomName = "${roomName}" and buildingId = "${buildingId}"  
 	  	</selectKey>
 	  	<if test="count > 0">
 	  		update cyy_room set id = #{id} 
@@ -35,8 +35,8 @@
 	  		<if test="roomName!=null and roomName!=''">
 	  			,roomName = #{roomName}
 	  		</if>
-	  		<if test="currentGuest!=null and currentGuest!=''">
-	  			,currentGuest = #{currentGuest}
+	  		<if test="currentGuestId!=null and currentGuestId!=''">
+	  			,currentGuestId = #{currentGuestId}
 	  		</if>
 	  		<if test="roomPrice!=null and roomPrice!=''">
 	  			,roomPrice = #{roomPrice}
@@ -50,20 +50,68 @@
 	  		<if test="nextRentTime!=null and nextRentTime!=''">
 	  			,nextRentTime = #{nextRentTime}
 	  		</if>
-	  		<if test="desc!=null and desc!=''">
-	  			,desc = #{desc}
+	  		<if test="detail!=null and detail!=''">
+	  			,detail = #{detail}
 	  		</if>
 	  		<if test="createTime!=null and createTime!=''">
 	  			,createTime = #{createTime}
 	  		</if>
-	  		,updateTime = now() where roomName = #{roomName} and buildingId = #{buildingId} 
+	  		,updateTime = now() where roomName = "${roomName}" and buildingId = "${buildingId}" 
 	  	</if>
 	  
 		<if test="count==0">
 			insert into cyy_room(
-			buildingId, roomName, currentGuestId, roomPrice, lastRent, lastRentTime, nextRentTime, desc, createTime, updateTime
+			<if test="buildingId!=null and buildingId!=''">
+				buildingId, 
+			</if>
+			<if test="roomName!=null and roomName!=''">
+				roomName, 
+			</if>
+			<if test="currentGuestId!=null and currentGuestId!=''">
+				currentGuestId, 
+			</if>
+			<if test="roomPrice!=null and roomPrice!=''">
+				roomPrice, 
+			</if>
+			<if test="lastRent!=null and lastRent!=''">
+				lastRent, 
+			</if>
+			<if test="lastRentTime!=null and lastRentTime!=''">
+				lastRentTime, 
+			</if>
+			<if test="nextRentTime!=null and nextRentTime!=''">
+				nextRentTime, 
+			</if>
+			<if test="detail!=null and detail!=''">
+				detail, 
+			</if>
+			createTime, updateTime
 			) values(
-			#{buildingId}, #{roomName}, #{currentGuestId}, #{roomPrice}, #{lastRent}, #{lastRentTime}, #{nextRentTime}, #{desc}, #{createTime}, now()
+			<if test="buildingId!=null and buildingId!=''">
+				"${buildingId}", 
+			</if>
+			<if test="roomName!=null and roomName!=''">
+				"${roomName}",
+			</if> 
+			<if test="currentGuestId!=null and currentGuestId!=''">
+				"${currentGuestId}", 
+			</if>
+			<if test="roomPrice!=null and roomPrice!=''">
+				"${roomPrice}", 
+			</if>
+			<if test="lastRent!=null and lastRent!=''">
+				"${lastRent}", 
+			</if>
+			<if test="lastRentTime!=null and lastRentTime!=''">
+				"${lastRentTime}", 
+			</if>
+			<if test="nextRentTime!=null and nextRentTime!=''">
+				"${nextRentTime}",
+			</if> 
+			<if test="detail!=null and detail!=''">
+				"${detail}", 
+			</if>
+			now(), now()
 			)
 		</if>
 	</insert>

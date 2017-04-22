@@ -10,7 +10,7 @@ public interface Cyy_buildingMapper extends BaseMapper {
 	
 	public Cyy_buildingFormMap getById(int id);
 	
-	public Cyy_buildingFormMap getByBuildingName(String buildingName);
+	public Cyy_buildingFormMap getByBuildingName(Cyy_buildingFormMap buildingFormMap);
 	
 	public void addOrUpdateByBuildingName(Cyy_buildingFormMap buildingName);
 	

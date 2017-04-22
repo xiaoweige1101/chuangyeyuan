@@ -78,7 +78,8 @@ public class ManageRoomContorller extends BaseController {
 		} catch (ParameterException e) {
 			throw new ParameterException("大楼名称和房间名称已经存在");
 		} catch (Exception e) {
-			 throw new SystemException("添加账号异常");
+			e.printStackTrace();
+			throw new SystemException("添加账号异常");
 		}
 		return "success";
 	}

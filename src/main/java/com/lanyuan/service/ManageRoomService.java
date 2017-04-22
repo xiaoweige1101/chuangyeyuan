@@ -51,17 +51,26 @@ public class ManageRoomService implements IManageRoomService {
 
 	@Override
 	public void addRoom(String buildingName, String roomName, String roomPrice, String desc) throws ParameterException {
-		Cyy_roomFormMap room = roomMapper.getRoom(buildingName, roomName);
+		Cyy_buildingFormMap building = new Cyy_buildingFormMap();
+		building.put("buildingName", buildingName);
+		Cyy_buildingFormMap buildingFormMap = buildingMapper.getByBuildingName(building);
+		
+		Cyy_roomFormMap roomParam = new Cyy_roomFormMap();
+		roomParam.put("id", buildingFormMap.getInt("id").intValue());
+		roomParam.put("roomName", roomName);
+		Cyy_roomFormMap room = roomMapper.getRoom(roomParam);
 		
 		if (room != null) {
 			throw new ParameterException("已经存在buildingName:" + buildingName + ", roomName:" + roomName);
 		}
 		
 		room = new Cyy_roomFormMap();
-		room.set("buildingName", buildingName);
-		room.set("roomName", roomName);
+		room.put("buildingId", buildingFormMap.getInt("id").intValue());
+		room.put("roomName", roomName);
+		room.put("roomPrice", roomPrice);
+		room.put("detail", desc);
 		
-		roomMapper.addOrUpdateByRoomNum(room);
+		roomMapper.addOrUpdateByRoomName(room);
 	}
 	
 }

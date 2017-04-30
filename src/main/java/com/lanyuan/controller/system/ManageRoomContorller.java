@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
 import com.lanyuan.entity.Cyy_roomFormMap;
-import com.lanyuan.entity.UserFormMap;
-import com.lanyuan.entity.UserGroupsFormMap;
 import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
 import com.lanyuan.plugin.PageView;
 import com.lanyuan.service.ManageRoomService;
 import com.lanyuan.util.Common;
-import com.lanyuan.util.PasswordHelper;
 
 @Controller
 @RequestMapping("/room")

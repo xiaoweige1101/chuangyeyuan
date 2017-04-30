@@ -45,7 +45,7 @@ public class ManageBuildingContorller extends BaseController {
 	//显示大楼Rest
 	@ResponseBody
 	@RequestMapping("/findByPage")
-	public PageView findByPage( String pageNow, String pageSize,String column,String sort) throws Exception {
+	public PageView findByPage(String pageNow, String pageSize,String column,String sort) throws Exception {
 		Cyy_buildingFormMap buildingFormMap = getFormMap(Cyy_buildingFormMap.class);
 		buildingFormMap=toFormMap(buildingFormMap, pageNow, pageSize, buildingFormMap.getStr("orderby"));
 

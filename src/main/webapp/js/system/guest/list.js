@@ -11,26 +11,30 @@ $(function() {
 		}, {
 			colkey : "name",
 			name : "姓名",
-			width : "100px",
+			width : "200px"
 		}, {
 			colkey : "sex",
 			name : "性别",
-			width : "100px",
+			width : "200px"
 		}, {
-			colkey : "IDCardNo",
-			name : "身份证号码"
+			colkey : "IDNo",
+			name : "身份证号码",
+			width : "300px"
 		}, {
 			colkey : "phonenumber",
-			name : "电话"
+			name : "电话",
+			width : "200px"
 		}, {
-			colkey : "roomNum",
-			name : "房间号"
+			colkey : "roomName",
+			name : "房间号",
+			width : "200px"
 		}, {
-			colkey : "description",
-			name : "备注"
+			colkey : "detail",
+			name : "备注",
+			width : "300px",
 		}
 		],
-		jsonUrl : rootPath + '/role/findByPage.shtml',
+		jsonUrl : rootPath + '/guest/findByPage.shtml',
 		dymCol:true,
 		checkbox : true
 	});
@@ -85,7 +89,7 @@ function addRole() {
 		title : "新增",
 		type : 2,
 		area : [ "600px", "60%" ],
-		content : rootPath + '/role/addUI.shtml'
+		content : rootPath + '/guest/addUI.shtml'
 	});
 }
 function delRole() {

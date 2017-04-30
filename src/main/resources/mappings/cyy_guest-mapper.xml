@@ -9,57 +9,61 @@
 	<!-- 以下与实体类的中字段一致 -->
 
 	<select id="getById" resultType="com.lanyuan.entity.Cyy_guestFormMap">
-		select * from cyy_guest where id = #{id} 
+		select * from cyy_guest where id = "${id}" 
+	</select>
+
+	<select id="getByIDNo" resultType="com.lanyuan.entity.Cyy_guestFormMap">
+		select * from cyy_guest where IDNo = "${IDNo}" 
 	</select>
 	
-	<select id="getRoomPage" resultType="com.lanyuan.entity.Cyy_guestFormMap">
-		select * from cyy_guest 
+	<select id="getGuestPage" resultType="com.lanyuan.entity.Cyy_guestFormMap">
+		select * from cyy_guest g left outer join cyy_room r on g.id = r.currentGuestId  
 		<if test="column != null">
           order by ${column} ${sort}
         </if>
 	</select>
 	
-	<insert id="addOrUpdateByRoomName"  parameterType="com.lanyuan.entity.Cyy_guestFormMap">
+	<insert id="addOrUpdateByIDNo"  parameterType="com.lanyuan.entity.Cyy_guestFormMap">
 		<selectKey keyProperty="count" resultType="int" order="BEFORE">
-	    	select count(*) from cyy_room where roomName = #{roomName} and buildingId = #{buildingId} 
+	    	select count(*) from cyy_guest where IDNo = #{IDNo} 
 	  	</selectKey>
 	  	<if test="count > 0">
-	  		update cyy_room set id = #{id} 
-	  		<if test="buildingId!=null and buildingId!=''">
-	  			,buildingId = #{buildingId}
+	  		update cyy_guest set id = #{id} 
+	  		<if test="name!=null and name!=''">
+	  			,name = "${name}" 
 	  		</if>
-	  		<if test="roomName!=null and roomName!=''">
-	  			,roomName = #{roomName}
+	  		<if test="sex!=null and sex!=''">
+	  			,sex = "${sex}"
 	  		</if>
-	  		<if test="currentGuest!=null and currentGuest!=''">
-	  			,currentGuest = #{currentGuest}
+	  		<if test="phonenumber!=null and phonenumber!=''">
+	  			,phonenumber = "${phonenumber}" 
 	  		</if>
-	  		<if test="roomPrice!=null and roomPrice!=''">
-	  			,roomPrice = #{roomPrice}
+	  		<if test="guranteeMoney!=null and guranteeMoney!=''">
+	  			,guranteeMoney = "${guranteeMoney}" 
 	  		</if>
-	  		<if test="lastRent!=null and lastRent!=''">
-	  			,lastRent = #{lastRent}
+	  		<if test="guranteeMoneyTakeInDate!=null and guranteeMoneyTakeInDate!=''">
+	  			,guranteeMoneyTakeInDate = "${guranteeMoneyTakeInDate}" 
 	  		</if>
-	  		<if test="lastRentTime!=null and lastRentTime!=''">
-	  			,lastRentTime = #{lastRentTime}
+	  		<if test="guranteeMoneyTakeOutDate!=null and guranteeMoneyTakeOutDate!=''">
+	  			,guranteeMoneyTakeOutDate = "${guranteeMoneyTakeOutDate}" 
 	  		</if>
-	  		<if test="nextRentTime!=null and nextRentTime!=''">
-	  			,nextRentTime = #{nextRentTime}
+	  		<if test="guranteeMoneyState!=null and guranteeMoneyState!=''">
+	  			,guranteeMoneyState = "${guranteeMoneyState}" 
 	  		</if>
-	  		<if test="desc!=null and desc!=''">
-	  			,desc = #{desc}
+	  		<if test="detail!=null and detail!=''">
+	  			,detail = "${detail}" 
 	  		</if>
 	  		<if test="createTime!=null and createTime!=''">
-	  			,createTime = #{createTime}
+	  			,createTime = "${createTime}" 
 	  		</if>
-	  		,updateTime = now() where roomName = #{roomName} and buildingId = #{buildingId} 
+	  		,updateTime = now() where IDNo = "${IDNo}"  
 	  	</if>
 	  
 		<if test="count==0">
-			insert into cyy_room(
-			buildingId, roomName, currentGuestId, roomPrice, lastRent, lastRentTime, nextRentTime, desc, createTime, updateTime
+			insert into cyy_guest(
+			IDNo, name, sex, phonenumber, guranteeMoney, detail, createTime, updateTime
 			) values(
-			#{buildingId}, #{roomName}, #{currentGuestId}, #{roomPrice}, #{lastRent}, #{lastRentTime}, #{nextRentTime}, #{desc}, #{createTime}, now()
+			"${IDNo}", "${name}", "${sex}", "${phonenumber}", "${guranteeMoney}", "${detail}", now(), now()
 			)
 		</if>
 	</insert>

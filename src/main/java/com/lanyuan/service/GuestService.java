@@ -34,4 +34,9 @@ public class GuestService implements IGuestService {
 		guestMapper.addOrUpdateByIDNo(guest);
 	}
 	
+	@Override
+	public void deleteById(int id) {
+		guestMapper.deleteByGuestId(id);
+	}
+	
 }

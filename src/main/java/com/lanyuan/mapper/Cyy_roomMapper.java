@@ -15,4 +15,6 @@ public interface Cyy_roomMapper extends BaseMapper {
 	public void addOrUpdateByRoomName(Cyy_roomFormMap roomFormMap);
 	
 	public void deleteByRoomNum(String roomNum);
+	
+	public void deleteByRoomroomId(int id);
 }

@@ -81,4 +81,17 @@ public class ManageRoomContorller extends BaseController {
 		return "success";
 	}
 	
+	//删除Guest
+	@ResponseBody
+	@RequestMapping("/deleteEntity")
+	@Transactional(readOnly=false)//需要事务操作必须加入此注解
+	@SystemLog(module="系统管理",methods="用户管理-删除用户")//凡需要处理业务逻辑的.都需要记录操作日志
+	public String deleteEntity() throws Exception {
+		String[] ids = getParaValues("ids");
+		for (String id : ids) {
+			manageRoomService.deleteByRoomroomId(Integer.parseInt(id));
+		}
+		return "success";
+	}
+	
 }

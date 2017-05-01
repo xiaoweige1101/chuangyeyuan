@@ -9,7 +9,7 @@
 	<!-- 以下与实体类的中字段一致 -->
 
 	<select id="getById" resultType="com.lanyuan.entity.Cyy_guestFormMap">
-		select * from cyy_guest where id = "${id}" 
+		select * from cyy_guest where id = #{id} 
 	</select>
 
 	<select id="getByIDNo" resultType="com.lanyuan.entity.Cyy_guestFormMap">

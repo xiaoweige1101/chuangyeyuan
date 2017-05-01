@@ -99,7 +99,7 @@ function delRole() {
 		return;
 	}
 	layer.confirm('是否删除？', function(index) {
-		var url = rootPath + '/role/deleteEntity.shtml';
+		var url = rootPath + '/guest/deleteEntity.shtml';
 		var s = CommnUtil.ajax(url, {
 			ids : cbox.join(",")
 		}, "json");

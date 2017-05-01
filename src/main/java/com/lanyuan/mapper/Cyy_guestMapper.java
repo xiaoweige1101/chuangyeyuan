@@ -13,4 +13,6 @@ public interface Cyy_guestMapper extends BaseMapper{
 	public List<Cyy_guestFormMap> getGuestPage();
 	
 	public void addOrUpdateByIDNo(Cyy_guestFormMap guest);
+	
+	public void deleteByGuestId(int id);
 }

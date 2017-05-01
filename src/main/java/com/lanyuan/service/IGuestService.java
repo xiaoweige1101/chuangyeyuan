@@ -10,4 +10,6 @@ public interface IGuestService {
 	public List<Cyy_guestFormMap> getGuestList();
 	
 	public void addGuest(Cyy_guestFormMap guest) throws ParameterException;
+	
+	public void deleteById(int id);
 }

@@ -10,4 +10,6 @@ public interface IManageRoomService {
 	public List<Cyy_roomFormMap> getRoomList();
 	
 	public void addRoom(String buildingName, String roomName, String roomPrice, String desc) throws ParameterException;
+	
+	public void deleteByRoomroomId(int id);
 }

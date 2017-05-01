@@ -73,4 +73,8 @@ public class ManageRoomService implements IManageRoomService {
 		roomMapper.addOrUpdateByRoomName(room);
 	}
 	
+	@Override
+	public void deleteByRoomroomId(int id) {
+		roomMapper.deleteByRoomroomId(id);
+	}
 }

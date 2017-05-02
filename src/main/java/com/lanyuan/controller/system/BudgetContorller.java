@@ -14,64 +14,75 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
-import com.lanyuan.entity.Cyy_roomFormMap;
+import com.lanyuan.entity.Cyy_guestFormMap;
 import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
 import com.lanyuan.plugin.PageView;
-import com.lanyuan.service.ManageRoomService;
+import com.lanyuan.service.GuestService;
 import com.lanyuan.util.Common;
 
 @Controller
-@RequestMapping("/room")
-public class ManageRoomContorller extends BaseController {
+@RequestMapping("/budget")
+public class BudgetContorller extends BaseController {
 	
 	@Autowired
-	private ManageRoomService manageRoomService;
-
-	/**********房间管理************/
+	private GuestService guestService;
+	
+	/**********租客管理************/
 	@RequestMapping("/list")
-	public String listRoom(Model model) throws Exception {
+	public String listGuest(Model model) throws Exception {
 		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/room/list";
+		return Common.BACKGROUND_PATH + "/system/guest/list";
 	}
 	
 	@ResponseBody
 	@RequestMapping("/findByPage")
-	public PageView findByPage( String pageNow, String pageSize,String column,String sort) throws Exception {
-		Cyy_roomFormMap roomFormMap = getFormMap(Cyy_roomFormMap.class);
-		roomFormMap = toFormMap(roomFormMap, pageNow, pageSize, roomFormMap.getStr("orderby"));
-
+	public PageView findByPage(String pageNow, String pageSize,String column,String sort) throws Exception {
+		
 		try {
-			roomFormMap.put("column", column);
-			roomFormMap.put("sort", sort);
+			Cyy_guestFormMap guestFormMap = getFormMap(Cyy_guestFormMap.class);
+			guestFormMap = toFormMap(guestFormMap, pageNow, pageSize, guestFormMap.getStr("orderby"));
+			guestFormMap.put("column", column);
+			guestFormMap.put("sort", sort);
 			
-			List<Cyy_roomFormMap> roomList = manageRoomService.getRoomList();
+			List<Cyy_guestFormMap> guestList = guestService.getGuestList();
 			
-			pageView.setRecords(roomList);
+			pageView.setRecords(guestList);
 			pageView.setOrderby(sort);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-        return pageView;
+		
+		return pageView;
 	}
 	
 	@RequestMapping("addUI")
 	public String addUI(Model model) throws Exception {
-		return Common.BACKGROUND_PATH + "/system/room/add";
+		return Common.BACKGROUND_PATH + "/system/guest/add";
 	}
 	
 	@ResponseBody
 	@RequestMapping("addEntity")
-	@SystemLog(module="系统管理",methods="房间管理-新增房间")//凡需要处理业务逻辑的.都需要记录操作日志
+	@SystemLog(module="系统管理",methods="房客管理-新增房客")//凡需要处理业务逻辑的.都需要记录操作日志
 	@Transactional(readOnly=false)//需要事务操作必须加入此注解
 	public String addEntity(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			String buildingName = request.getParameter("buildingName");
-			String roomName = request.getParameter("roomName");
-			String roomPrice = request.getParameter("roomPrice");
-			String desc = request.getParameter("desc");
-			manageRoomService.addRoom(buildingName, roomName, roomPrice, desc);
+			String guestName = request.getParameter("cyy_guest.name");
+			String IDNo = request.getParameter("cyy_guest.IDNo");
+			String sex = request.getParameter("cyy_guest.sex");
+			String granteeMoney = request.getParameter("cyy_guest.granteeMoney");
+			String phonenumber = request.getParameter("cyy_guest.phonenumber");
+			String detail = request.getParameter("cyy_guest.detail");
+			
+			Cyy_guestFormMap guest = new Cyy_guestFormMap();
+			guest.set("name", guestName);
+			guest.set("IDNo", IDNo);
+			guest.set("sex", sex);
+			guest.set("granteeMoney", granteeMoney);
+			guest.set("phonenumber", phonenumber);
+			guest.set("detail", detail);
+			
+			guestService.addGuest(guest);
 		} catch (ParameterException e) {
 			throw new ParameterException("大楼名称和房间名称已经存在");
 		} catch (Exception e) {
@@ -89,22 +100,9 @@ public class ManageRoomContorller extends BaseController {
 	public String deleteEntity() throws Exception {
 		String[] ids = getParaValues("ids");
 		for (String id : ids) {
-			manageRoomService.deleteByRoomroomId(Integer.parseInt(id));
+			guestService.deleteById(Integer.parseInt(id));
 		}
 		return "success";
 	}
 	
-	
-	//删除Guest
-	@ResponseBody
-	@RequestMapping("/shouzuEntity")
-	@Transactional(readOnly=false)//需要事务操作必须加入此注解
-	@SystemLog(module="系统管理",methods="用户管理-删除用户")//凡需要处理业务逻辑的.都需要记录操作日志
-	public String shouzuEntity() throws Exception {
-		String[] ids = getParaValues("ids");
-		for (String id : ids) {
-//			manageRoomService.deleteByRoomroomId(Integer.parseInt(id));
-		}
-		return "success";
-	}
 }

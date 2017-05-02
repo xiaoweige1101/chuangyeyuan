@@ -10,64 +10,73 @@ $(function() {
 				l_column : [ {
 					colkey : "id",
 					name : "id",
-					hide : true
-				}, {
-					colkey : "accountName",
-					name : "账号",
-					isSort:true
-				}, {
-					colkey : "module",
-					name : "模块",
-					isSort:true
+					hide : true,
+					width : "0%"
 				}, {
 					colkey : "accountName",
 					name : "账号",
 					isSort:true,
-					hide : true
+					width : "10%"
 				}, {
 					colkey : "module",
 					name : "模块",
 					isSort:true,
-					hide : true
+					width : "10%"
+				}, {
+					colkey : "accountName",
+					name : "账号",
+					isSort:true,
+					hide : true,
+					width : "0%"
+				}, {
+					colkey : "module",
+					name : "模块",
+					isSort:true,
+					hide : true,
+					width : "0%"
 				}, {
 					colkey : "methods",
 					name : "方法",
-					isSort:true
+					isSort:true,
+					width : "10%"
 				}, {
 					colkey : "actionTime",
 					name : "响应时间",
-					width : "150px",
+					width : "0%",
 					isSort:true,
 					hide : true
 				} , {
 					colkey : "actionTime",
 					name : "响应时间",
-					width : "150px",
+					width : "0%",
 					isSort:true,
 					hide : true
 				} , {
 					colkey : "actionTime",
 					name : "响应时间",
-					width : "150px",
+					width : "0%",
 					isSort:true,
 					hide : true
 				} , {
 					colkey : "userIP",
 					name : "IP地址",
-					isSort:true
+					isSort:true,
+					width : "10%"
 				}, {
 					colkey : "operTime",
 					name : "执行时间",
 					isSort:true,
+					width : "10%",
 					renderData : function(rowindex,data, rowdata, column) {
 						return new Date(data).format("yyyy-MM-dd hh:mm:ss");
 					}
 				}, {
 					colkey : "description",
-					name : "执行描述"
+					name : "执行描述",
+					width : "10%"
 				}],
 				localData:localData,
-				width:1200,
+				width:"100%",
 				//jsonUrl : rootPath + '/log/findByPage.shtml',
 				local:true,//支持本地数据前端分页
 				checkbox : false

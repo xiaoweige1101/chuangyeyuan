@@ -229,7 +229,17 @@
 														<i class="fa fa-th-list icon"> <b class="bg-success"></b>
 														</i>
 													</c:if> 
+
+													<c:if test="${s.index==5}">
+														<i class="fa fa-book icon"> <b class="bg-info"></b>
+														</i>
+													</c:if> 
 													
+													<c:if test="${s.index==6}">
+														<i class="fa fa-pencil-square icon"> <b class="bg-warning"></b>
+														</i>
+													</c:if> 
+
 													<span class="pull-right"> <i
 														class="fa fa-angle-down text"></i> <i
 														class="fa fa-angle-up text-active"></i>

@@ -70,6 +70,9 @@ $(function() {
 	$("#permissions").click("click", function() {
 		permissions();
 	});
+	$("#shouzu").click("click", function() {
+		shouzu();
+	});
 });
 function editRole() {
 	var cbox = grid.getSelectedCheckbox();
@@ -122,6 +125,33 @@ function delRole() {
 			grid.loadData();
 		} else {
 			layer.msg('删除失败');
+		}
+	});
+}
+
+
+function shouzu() {
+	var cbox = grid.getSelectedCheckbox();
+	if (cbox == "") {
+		layer.msg("请选择删除项！！");
+		return;
+	}
+	
+	if (cbox.toString().indexOf(",") != -1) {
+		layer.msg("只能选择一个房间收租！！");
+		return;
+	}
+	
+	layer.confirm('是否确定要收租？', function(index) {
+		var url = rootPath + '/room/shouzu.shtml';
+		var s = CommnUtil.ajax(url, {
+			ids : cbox.join(",")
+		}, "json");
+		if (s == "success") {
+			layer.msg('收租成功');
+			grid.loadData();
+		} else {
+			layer.msg('收租失败');
 		}
 	});
 }

@@ -1,14 +1,14 @@
 package com.lanyuan.mapper;
 
-import com.lanyuan.entity.Cyy_roomFormMap;
+import com.lanyuan.entity.Cyy_budgetFormMap;
 import com.lanyuan.mapper.base.BaseMapper;
 
 public interface Cyy_budgetMapper extends BaseMapper{
-	public Cyy_roomFormMap getById(int id);
+	public Cyy_budgetFormMap getById(int id);
 	
-	public Cyy_roomFormMap getByRoomNum(String roomNum);
+	public Cyy_budgetFormMap getBudgetByRommId(int roomId);
 	
-	public void addOrUpdateByRoomNum(Cyy_roomFormMap roomFormMap);
+	public void addOrUpdateById(Cyy_budgetFormMap roomFormMap);
 	
-	public void deleteByRoomNum(String roomNum);
+	public void deleteByRoomName(String roomName);
 }

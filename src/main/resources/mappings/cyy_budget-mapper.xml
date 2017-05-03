@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanyuan.mapper.Cyy_budgetMapper">
+	<!--mybatis ehcache缓存配置 -->
+	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 <cache type="org.mybatis.caches.ehcache.LoggingEhcache" 
+		/> -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+	<!-- 以下与实体类的中字段一致 -->
+
+	<select id="getById" resultType="com.lanyuan.entity.Cyy_budgetFormMap">
+		select * from cyy_guest where id = #{id} 
+	</select>
+
+	<select id="getByIDNo" resultType="com.lanyuan.entity.Cyy_budgetFormMap">
+		select * from cyy_guest where IDNo = "${IDNo}" 
+	</select>
+	
+	<select id="getGuestPage" resultType="com.lanyuan.entity.Cyy_budgetFormMap">
+		select * from cyy_guest g left outer join cyy_room r on g.id = r.currentGuestId  
+		<if test="column != null">
+          order by ${column} ${sort}
+        </if>
+	</select>
+	
+	<insert id="addOrUpdateByIDNo"  parameterType="com.lanyuan.entity.Cyy_budgetFormMap">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+	    	select count(*) from cyy_guest where IDNo = #{IDNo} 
+	  	</selectKey>
+	  	<if test="count > 0">
+	  		update cyy_guest set id = #{id} 
+	  		<if test="name!=null and name!=''">
+	  			,name = "${name}" 
+	  		</if>
+	  		<if test="sex!=null and sex!=''">
+	  			,sex = "${sex}"
+	  		</if>
+	  		<if test="phonenumber!=null and phonenumber!=''">
+	  			,phonenumber = "${phonenumber}" 
+	  		</if>
+	  		<if test="guranteeMoney!=null and guranteeMoney!=''">
+	  			,guranteeMoney = "${guranteeMoney}" 
+	  		</if>
+	  		<if test="guranteeMoneyTakeInDate!=null and guranteeMoneyTakeInDate!=''">
+	  			,guranteeMoneyTakeInDate = "${guranteeMoneyTakeInDate}" 
+	  		</if>
+	  		<if test="guranteeMoneyTakeOutDate!=null and guranteeMoneyTakeOutDate!=''">
+	  			,guranteeMoneyTakeOutDate = "${guranteeMoneyTakeOutDate}" 
+	  		</if>
+	  		<if test="guranteeMoneyState!=null and guranteeMoneyState!=''">
+	  			,guranteeMoneyState = "${guranteeMoneyState}" 
+	  		</if>
+	  		<if test="detail!=null and detail!=''">
+	  			,detail = "${detail}" 
+	  		</if>
+	  		<if test="createTime!=null and createTime!=''">
+	  			,createTime = "${createTime}" 
+	  		</if>
+	  		,updateTime = now() where IDNo = "${IDNo}"  
+	  	</if>
+	  
+		<if test="count==0">
+			insert into cyy_guest(
+			IDNo, name, sex, phonenumber, guranteeMoney, detail, createTime, updateTime
+			) values(
+			"${IDNo}", "${name}", "${sex}", "${phonenumber}", "${guranteeMoney}", "${detail}", now(), now()
+			)
+		</if>
+	</insert>
+	
+	<delete id="deleteByGuestId">
+		delete from cyy_guest where id = #{id} 
+	</delete>
+
+</mapper>

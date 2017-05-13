@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
+import com.lanyuan.entity.Cyy_budgetFormMap;
 import com.lanyuan.entity.Cyy_guestFormMap;
 import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
 import com.lanyuan.plugin.PageView;
+import com.lanyuan.service.BudgetService;
 import com.lanyuan.service.GuestService;
 import com.lanyuan.util.Common;
 
@@ -26,13 +28,13 @@ import com.lanyuan.util.Common;
 public class BudgetContorller extends BaseController {
 	
 	@Autowired
-	private GuestService guestService;
+	private BudgetService budgetService;
 	
 	/**********租客管理************/
 	@RequestMapping("/list")
 	public String listGuest(Model model) throws Exception {
 		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/guest/list";
+		return Common.BACKGROUND_PATH + "/system/budget/list";
 	}
 	
 	@ResponseBody
@@ -40,14 +42,14 @@ public class BudgetContorller extends BaseController {
 	public PageView findByPage(String pageNow, String pageSize,String column,String sort) throws Exception {
 		
 		try {
-			Cyy_guestFormMap guestFormMap = getFormMap(Cyy_guestFormMap.class);
-			guestFormMap = toFormMap(guestFormMap, pageNow, pageSize, guestFormMap.getStr("orderby"));
-			guestFormMap.put("column", column);
-			guestFormMap.put("sort", sort);
+			Cyy_budgetFormMap budgetFormMap = getFormMap(Cyy_budgetFormMap.class);
+			budgetFormMap = toFormMap(budgetFormMap, pageNow, pageSize, budgetFormMap.getStr("orderby"));
+			budgetFormMap.put("column", column);
+			budgetFormMap.put("sort", sort);
 			
-			List<Cyy_guestFormMap> guestList = guestService.getGuestList();
+			List<Cyy_budgetFormMap> budgetList = budgetService.getBudgetList();
 			
-			pageView.setRecords(guestList);
+			pageView.setRecords(budgetList);
 			pageView.setOrderby(sort);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +84,7 @@ public class BudgetContorller extends BaseController {
 			guest.set("phonenumber", phonenumber);
 			guest.set("detail", detail);
 			
-			guestService.addGuest(guest);
+//			guestService.addGuest(guest);
 		} catch (ParameterException e) {
 			throw new ParameterException("大楼名称和房间名称已经存在");
 		} catch (Exception e) {
@@ -100,7 +102,7 @@ public class BudgetContorller extends BaseController {
 	public String deleteEntity() throws Exception {
 		String[] ids = getParaValues("ids");
 		for (String id : ids) {
-			guestService.deleteById(Integer.parseInt(id));
+//			guestService.deleteById(Integer.parseInt(id));
 		}
 		return "success";
 	}

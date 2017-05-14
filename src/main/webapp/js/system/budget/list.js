@@ -6,48 +6,50 @@ $(function() {
 		l_column : [ {
 			colkey : "guestName",
 			name : "租客姓名",
-			width : "50px",
-			hide : true
+			width : "8%"
 		}, {
 			colkey : "room",
 			name : "房间",
-			width : "200px"
+			width : "12%"
 		}, {
 			colkey : "waterMoney",
 			name : "水费",
-			width : "200px"
+			width : "10%"
 		}, {
 			colkey : "electMoney",
 			name : "电费",
-			width : "200px"
+			width : "10%"
 		}, {
 			colkey : "networkMoney",
 			name : "网费",
-			width : "200px"
+			width : "10%"
 		}, {
 			colkey : "rentMoney",
 			name : "总租金",
-			width : "200px"
+			width : "10%"
 		}, {
 			colkey : "rentStartDate",
 			name : "起始日期",
-			width : "200px"
+			width : "10%"
 		}, {
 			colkey : "rentEntEndDate",
 			name : "结束日期",
-			width : "200px"
+			width : "10%"
 		}, {
 			colkey : "userName",
 			name : "收租人",
-			width : "200px"
+			width : "10%"
 		}, {
 			colkey : "detail",
 			name : "备注",
-			width : "300px",
+			width : "10%",
 		}, {
 			colkey : "updateTime",
 			name : "更新日期",
-			width : "300px",
+			width : "10%",
+			renderData : function(rowindex,data, rowdata, column) {
+				return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+			}
 		}
 		],
 		jsonUrl : rootPath + '/budget/findByPage.shtml',

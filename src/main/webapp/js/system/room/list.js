@@ -138,20 +138,15 @@ function shouzu() {
 	}
 	
 	if (cbox.toString().indexOf(",") != -1) {
-		layer.msg("只能选择一个房间收租！！");
+		layer.msg("只能选择一个房间收租!!");
 		return;
 	}
 	
-	layer.confirm('是否确定要收租？', function(index) {
-		var url = rootPath + '/room/shouzu.shtml';
-		var s = CommnUtil.ajax(url, {
-			ids : cbox.join(",")
-		}, "json");
-		if (s == "success") {
-			layer.msg('收租成功');
-			grid.loadData();
-		} else {
-			layer.msg('收租失败');
-		}
+	pageii = layer.open({
+		title : "收租",
+		type : 2,
+		area : [ "600px", "60%" ],
+		content : rootPath + '/room/shouzu.shtml?roomId=' + cbox.toString()
 	});
+	
 }

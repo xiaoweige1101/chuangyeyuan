@@ -26,6 +26,17 @@ public class ManageRoomService implements IManageRoomService {
 	@Inject
 	private Cyy_buildingMapper buildingMapper;
 	
+	@Override
+	public Cyy_buildingFormMap getBuilding(int buildingId) {
+		return buildingMapper.getById(buildingId);
+	}
+	
+	@Override
+	public Cyy_roomFormMap getById(int id) {
+		return roomMapper.getById(id);
+	}
+	
+	@Override
 	public List<Cyy_roomFormMap> getRoomList() {
 		List<Cyy_roomFormMap> roomList = roomMapper.getRoomPage();
 		

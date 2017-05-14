@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
+import com.lanyuan.entity.Cyy_buildingFormMap;
 import com.lanyuan.entity.Cyy_roomFormMap;
 import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
@@ -94,6 +95,23 @@ public class ManageRoomContorller extends BaseController {
 		return "success";
 	}
 	
+	@RequestMapping("shouzu")
+	public String shouzu(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
+		String roomId = req.getParameter("roomId");
+		Cyy_roomFormMap room = manageRoomService.getById(Integer.parseInt(roomId));
+		int buildingId = room.getInt("buildingId");
+		String roomName = room.getStr("roomName");
+		int roomPrice = room.getInt("roomPrice").intValue();
+		Cyy_buildingFormMap building = manageRoomService.getBuilding(buildingId);
+		String buildingName = building.getStr("buildingName");
+		
+		
+		model.addAttribute("buildingName", buildingName);
+		model.addAttribute("roomName", roomName);
+		model.addAttribute("roomPrice", roomPrice);
+		
+		return Common.BACKGROUND_PATH + "/system/room/shouzu";
+	}
 	
 	//删除Guest
 	@ResponseBody
@@ -103,7 +121,8 @@ public class ManageRoomContorller extends BaseController {
 	public String shouzuEntity() throws Exception {
 		String[] ids = getParaValues("ids");
 		for (String id : ids) {
-//			manageRoomService.deleteByRoomroomId(Integer.parseInt(id));
+
+		
 		}
 		return "success";
 	}

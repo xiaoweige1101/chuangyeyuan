@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.ibatis.reflection.ExceptionUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,8 @@ import com.lanyuan.util.Common;
 @Controller
 @RequestMapping("/room")
 public class ManageRoomContorller extends BaseController {
+	
+	final private static Logger logger = Logger.getLogger(ManageRoomContorller.class);
 	
 	@Autowired
 	private ManageRoomService manageRoomService;
@@ -97,19 +102,24 @@ public class ManageRoomContorller extends BaseController {
 	
 	@RequestMapping("shouzu")
 	public String shouzu(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
-		String roomId = req.getParameter("roomId");
-		Cyy_roomFormMap room = manageRoomService.getById(Integer.parseInt(roomId));
-		int buildingId = room.getInt("buildingId");
-		String roomName = room.getStr("roomName");
-		int roomPrice = room.getInt("roomPrice").intValue();
-		Cyy_buildingFormMap building = manageRoomService.getBuilding(buildingId);
-		String buildingName = building.getStr("buildingName");
-		
-		
-		model.addAttribute("buildingName", buildingName);
-		model.addAttribute("roomName", roomName);
-		model.addAttribute("roomPrice", roomPrice);
-		
+		try {
+			String roomId = req.getParameter("roomId");
+			Cyy_roomFormMap room = manageRoomService.getById(Integer.parseInt(roomId));
+			int buildingId = room.getInt("buildingId");
+			String roomName = room.getStr("roomName");
+			int roomPrice = room.getInt("roomPrice").intValue();
+			Cyy_buildingFormMap building = manageRoomService.getBuilding(buildingId);
+			String buildingName = building.getStr("buildingName");
+			
+			
+			model.addAttribute("buildingName", buildingName);
+			model.addAttribute("roomName", roomName);
+			model.addAttribute("roomPrice", roomPrice);
+			model.addAttribute("roomId", roomId);
+		} catch (Exception e) {
+			logger.error(ExceptionUtils.getFullStackTrace(e));
+			throw e;
+		}
 		return Common.BACKGROUND_PATH + "/system/room/shouzu";
 	}
 	
@@ -118,12 +128,25 @@ public class ManageRoomContorller extends BaseController {
 	@RequestMapping("/shouzuEntity")
 	@Transactional(readOnly=false)//需要事务操作必须加入此注解
 	@SystemLog(module="系统管理",methods="用户管理-删除用户")//凡需要处理业务逻辑的.都需要记录操作日志
-	public String shouzuEntity() throws Exception {
-		String[] ids = getParaValues("ids");
-		for (String id : ids) {
+	public String shouzuEntity(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
+		try {
+			String buildingName = req.getParameter("buildingName");
+			String roomName = req.getParameter("roomName");
+			String roomPrice = req.getParameter("roomPrice");
+			String electMoney = req.getParameter("electMoney");
+			String waterMoney = req.getParameter("waterMoney");
+			String networkMoney = req.getParameter("networkMoney");
+			String roomId = req.getParameter("roomId");
+			
+			logger.info("buildingName:" + buildingName + ",roomName:" + roomName + ",roomPrice:" + roomPrice + ",electMoney:" + electMoney
+					+ ",waterMoney:" + waterMoney + ",networkMoney:" + networkMoney);
+			logger.info("roomId:" + roomId);
 
-		
+			return "success";
+		} catch (Exception e) {
+			logger.error(ExceptionUtils.getFullStackTrace(e));
+			return "failure";
 		}
-		return "success";
+		
 	}
 }

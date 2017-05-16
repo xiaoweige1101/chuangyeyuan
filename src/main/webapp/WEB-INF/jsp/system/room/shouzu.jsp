@@ -31,10 +31,12 @@ label[class^="btn btn-default"] {
 		action="${ctx}/room/shouzuEntity.shtml">
 		<section class="panel panel-default">
 		<div class="panel-body">
+		
+			<input type="hidden" id="roomId" name="roomId" value=${roomId}></input>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">大楼名称</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc" name="buildingName" id="buildingName" value="${buildingName}" />
+					<input type="text" class="form-control checkacc" name="buildingName" id="buildingName" value="${buildingName}" readonly="readonly" />
 				</div>
 			</div>
 			
@@ -43,23 +45,39 @@ label[class^="btn btn-default"] {
 			<div class="form-group">
 				<label class="col-sm-3 control-label">房间名称</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control checkacc"  name="roomName" id="roomName" value="${roomName}" />
+					<input type="text" class="form-control checkacc"  name="roomName" id="roomName" value="${roomName}" readonly="readonly" />
 				</div>
 			</div>
 			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">房租</label>
+				<label class="col-sm-3 control-label">房租(元)</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control checkacc"  name="roomPrice" id="roomPrice" value="${roomPrice}" />
 				</div>
 			</div>
+			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">描述</label>
+				<label class="col-sm-3 control-label">电费(元)</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="请输入账号描述"
-						name="desc" id="desc">
+					<input type="text" class="form-control" name="electMoney" id="electMoney" value="0" />
+				</div>
+			</div>
+			
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">水费(元)</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" name="waterMoney" id="waterMoney" value="0" />
+				</div>
+			</div>
+			
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">网费(元)</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" name="networkMoney" id="networkMoney" value="0" />
 				</div>
 			</div>
 		</div>

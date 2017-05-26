@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.ibatis.reflection.ExceptionUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -111,6 +110,11 @@ public class ManageRoomContorller extends BaseController {
 			Cyy_buildingFormMap building = manageRoomService.getBuilding(buildingId);
 			String buildingName = building.getStr("buildingName");
 			
+			String userId = Common.findUserSessionId(req);
+			
+//			manageRoomService.
+			
+			System.out.println("userId:" + userId);
 			
 			model.addAttribute("buildingName", buildingName);
 			model.addAttribute("roomName", roomName);
@@ -142,11 +146,14 @@ public class ManageRoomContorller extends BaseController {
 					+ ",waterMoney:" + waterMoney + ",networkMoney:" + networkMoney);
 			logger.info("roomId:" + roomId);
 
+			
+			
 			return "success";
 		} catch (Exception e) {
 			logger.error(ExceptionUtils.getFullStackTrace(e));
 			return "failure";
 		}
+		
 		
 	}
 }

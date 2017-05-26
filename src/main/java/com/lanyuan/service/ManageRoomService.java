@@ -6,10 +6,12 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.lanyuan.entity.Cyy_budgetFormMap;
 import com.lanyuan.entity.Cyy_buildingFormMap;
 import com.lanyuan.entity.Cyy_guestFormMap;
 import com.lanyuan.entity.Cyy_roomFormMap;
 import com.lanyuan.exception.ParameterException;
+import com.lanyuan.mapper.Cyy_budgetMapper;
 import com.lanyuan.mapper.Cyy_buildingMapper;
 import com.lanyuan.mapper.Cyy_guestMapper;
 import com.lanyuan.mapper.Cyy_roomMapper;
@@ -25,6 +27,9 @@ public class ManageRoomService implements IManageRoomService {
 	
 	@Inject
 	private Cyy_buildingMapper buildingMapper;
+	
+	@Inject
+	private Cyy_budgetMapper budgetMapper;
 	
 	@Override
 	public Cyy_buildingFormMap getBuilding(int buildingId) {
@@ -87,5 +92,19 @@ public class ManageRoomService implements IManageRoomService {
 	@Override
 	public void deleteByRoomroomId(int id) {
 		roomMapper.deleteByRoomroomId(id);
+	}
+	
+	public void shouzu(int userId, int guestId, int roomId, int rentMoney, int waterMoney, int electMoney, String detail) {
+		
+		Cyy_budgetFormMap budgetFormMap = new Cyy_budgetFormMap();
+		budgetFormMap.set("guestId", guestId);
+		budgetFormMap.set("roomId", roomId);
+		budgetFormMap.set("waterMoney", waterMoney);
+		budgetFormMap.set("electMoney", electMoney);
+//		budgetFormMap.set("totalMoney", totalMoney);
+		budgetFormMap.set("userId", userId);
+		budgetFormMap.set("detail", detail);
+		
+		budgetMapper.addOrUpdateById(budgetFormMap);
 	}
 }

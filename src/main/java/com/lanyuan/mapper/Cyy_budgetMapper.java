@@ -12,7 +12,7 @@ public interface Cyy_budgetMapper extends BaseMapper{
 	
 	public Cyy_budgetFormMap getBudgetByRommId(int roomId);
 	
-	public void addOrUpdateById(Cyy_budgetFormMap roomFormMap);
+	public void addOrUpdateById(Cyy_budgetFormMap budgetFormMap);
 	
 	public void deleteByRoomName(String roomName);
 }

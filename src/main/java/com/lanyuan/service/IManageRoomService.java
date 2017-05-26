@@ -17,4 +17,6 @@ public interface IManageRoomService {
 	public Cyy_roomFormMap getById(int id);
 	
 	public Cyy_buildingFormMap getBuilding(int buildingId);
+	
+	
 }

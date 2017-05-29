@@ -33,51 +33,59 @@ label[class^="btn btn-default"] {
 		<div class="panel-body">
 		
 			<input type="hidden" id="roomId" name="roomId" value=${roomId}></input>
+			<input type="hidden" id="currentGuestId" name="currentGuestId" value=${currentGuestId}></input>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">大楼名称</label>
-				<div class="col-sm-9">
+				<label class="col-sm-3 control-label" style="width:20%">大楼名称</label>
+				<div class="col-sm-9" style="width:60%;">
 					<input type="text" class="form-control checkacc" name="buildingName" id="buildingName" value="${buildingName}" readonly="readonly" />
 				</div>
 			</div>
 			
-			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">房间名称</label>
-				<div class="col-sm-9">
+				<label class="col-sm-3 control-label" style="width:20%">房间名称</label>
+				<div class="col-sm-9" style="width:60%;">
 					<input type="text" class="form-control checkacc"  name="roomName" id="roomName" value="${roomName}" readonly="readonly" />
 				</div>
 			</div>
 			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">房租(元)</label>
-				<div class="col-sm-9">
+				<label class="col-sm-3 control-label" style="width:20%">房租(元)</label>
+				<div class="col-sm-9" style="width:60%;">
 					<input type="text" class="form-control checkacc"  name="roomPrice" id="roomPrice" value="${roomPrice}" />
 				</div>
 			</div>
 			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">电费(元)</label>
-				<div class="col-sm-9">
+				<label class="col-sm-3 control-label" style="width:20%">电费(元)</label>
+				<div class="col-sm-9" style="width:60%;">
 					<input type="text" class="form-control" name="electMoney" id="electMoney" value="0" />
 				</div>
 			</div>
 			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">水费(元)</label>
-				<div class="col-sm-9">
+				<label class="col-sm-3 control-label" style="width:20%">水费(元)</label>
+				<div class="col-sm-9" style="width:60%;">
 					<input type="text" class="form-control" name="waterMoney" id="waterMoney" value="0" />
 				</div>
 			</div>
 			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">网费(元)</label>
-				<div class="col-sm-9">
+				<label class="col-sm-3 control-label" style="width:20%">网费(元)</label>
+				<div class="col-sm-9" style="width:60%;">
 					<input type="text" class="form-control" name="networkMoney" id="networkMoney" value="0" />
+				</div>
+			</div>
+			
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label" style="width:20%">备注</label>
+				<div class="col-sm-9" style="width:60%;">
+					<input type="text" class="form-control" name="detail" id="detail" value="0" />
 				</div>
 			</div>
 		</div>

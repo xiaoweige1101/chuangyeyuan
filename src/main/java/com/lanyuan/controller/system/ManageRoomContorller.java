@@ -27,49 +27,49 @@ import com.lanyuan.util.Common;
 @Controller
 @RequestMapping("/room")
 public class ManageRoomContorller extends BaseController {
-	
+
 	final private static Logger logger = Logger.getLogger(ManageRoomContorller.class);
-	
+
 	@Autowired
 	private ManageRoomService manageRoomService;
 
-	/**********房间管理************/
+	/********** 房间管理 ************/
 	@RequestMapping("/list")
 	public String listRoom(Model model) throws Exception {
 		model.addAttribute("res", findByRes());
 		return Common.BACKGROUND_PATH + "/system/room/list";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/findByPage")
-	public PageView findByPage( String pageNow, String pageSize,String column,String sort) throws Exception {
+	public PageView findByPage(String pageNow, String pageSize, String column, String sort) throws Exception {
 		Cyy_roomFormMap roomFormMap = getFormMap(Cyy_roomFormMap.class);
 		roomFormMap = toFormMap(roomFormMap, pageNow, pageSize, roomFormMap.getStr("orderby"));
 
 		try {
 			roomFormMap.put("column", column);
 			roomFormMap.put("sort", sort);
-			
+
 			List<Cyy_roomFormMap> roomList = manageRoomService.getRoomList();
-			
+
 			pageView.setRecords(roomList);
 			pageView.setOrderby(sort);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-        return pageView;
+
+		return pageView;
 	}
-	
+
 	@RequestMapping("addUI")
 	public String addUI(Model model) throws Exception {
 		return Common.BACKGROUND_PATH + "/system/room/add";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("addEntity")
-	@SystemLog(module="系统管理",methods="房间管理-新增房间")//凡需要处理业务逻辑的.都需要记录操作日志
-	@Transactional(readOnly=false)//需要事务操作必须加入此注解
+	@SystemLog(module = "系统管理", methods = "房间管理-新增房间") // 凡需要处理业务逻辑的.都需要记录操作日志
+	@Transactional(readOnly = false) // 需要事务操作必须加入此注解
 	public String addEntity(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			String buildingName = request.getParameter("buildingName");
@@ -85,12 +85,12 @@ public class ManageRoomContorller extends BaseController {
 		}
 		return "success";
 	}
-	
-	//删除Guest
+
+	// 删除Guest
 	@ResponseBody
 	@RequestMapping("/deleteEntity")
-	@Transactional(readOnly=false)//需要事务操作必须加入此注解
-	@SystemLog(module="系统管理",methods="用户管理-删除用户")//凡需要处理业务逻辑的.都需要记录操作日志
+	@Transactional(readOnly = false) // 需要事务操作必须加入此注解
+	@SystemLog(module = "系统管理", methods = "用户管理-删除用户") // 凡需要处理业务逻辑的.都需要记录操作日志
 	public String deleteEntity() throws Exception {
 		String[] ids = getParaValues("ids");
 		for (String id : ids) {
@@ -98,7 +98,7 @@ public class ManageRoomContorller extends BaseController {
 		}
 		return "success";
 	}
-	
+
 	@RequestMapping("shouzu")
 	public String shouzu(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
 		try {
@@ -109,29 +109,31 @@ public class ManageRoomContorller extends BaseController {
 			int roomPrice = room.getInt("roomPrice").intValue();
 			Cyy_buildingFormMap building = manageRoomService.getBuilding(buildingId);
 			String buildingName = building.getStr("buildingName");
-			
+			String currentGuestId = String.valueOf(room.getInt("currentGuestId").intValue());
+
 			String userId = Common.findUserSessionId(req);
-			
-//			manageRoomService.
-			
+
+			// manageRoomService.
+
 			System.out.println("userId:" + userId);
-			
+
 			model.addAttribute("buildingName", buildingName);
 			model.addAttribute("roomName", roomName);
 			model.addAttribute("roomPrice", roomPrice);
 			model.addAttribute("roomId", roomId);
+			model.addAttribute("currentGuestId", currentGuestId);
 		} catch (Exception e) {
 			logger.error(ExceptionUtils.getFullStackTrace(e));
 			throw e;
 		}
 		return Common.BACKGROUND_PATH + "/system/room/shouzu";
 	}
-	
-	//删除Guest
+
+	// 删除Guest
 	@ResponseBody
 	@RequestMapping("/shouzuEntity")
-	@Transactional(readOnly=false)//需要事务操作必须加入此注解
-	@SystemLog(module="系统管理",methods="用户管理-删除用户")//凡需要处理业务逻辑的.都需要记录操作日志
+	@Transactional(readOnly = false) // 需要事务操作必须加入此注解
+	@SystemLog(module = "系统管理", methods = "用户管理-删除用户") // 凡需要处理业务逻辑的.都需要记录操作日志
 	public String shouzuEntity(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
 		try {
 			String buildingName = req.getParameter("buildingName");
@@ -141,19 +143,34 @@ public class ManageRoomContorller extends BaseController {
 			String waterMoney = req.getParameter("waterMoney");
 			String networkMoney = req.getParameter("networkMoney");
 			String roomId = req.getParameter("roomId");
-			
-			logger.info("buildingName:" + buildingName + ",roomName:" + roomName + ",roomPrice:" + roomPrice + ",electMoney:" + electMoney
-					+ ",waterMoney:" + waterMoney + ",networkMoney:" + networkMoney);
-			logger.info("roomId:" + roomId);
+			String currentGuestId = req.getParameter("currentGuestId");
+			String detail = req.getParameter("detail");
+			String userId = Common.findUserSessionId(req);
+			logger.info("buildingName:" + buildingName + ",roomName:" + roomName + ",roomPrice:" + roomPrice
+					+ ",electMoney:" + electMoney + ",waterMoney:" + waterMoney + ",networkMoney:" + networkMoney);
+			logger.info("roomId:" + roomId + ", userId:" + userId);
 
-			
-			
+			if (electMoney == null) {
+				electMoney = "0";
+			}
+
+			if (waterMoney == null) {
+				waterMoney = "0";
+			}
+
+			if (networkMoney == null) {
+				networkMoney = "0";
+			}
+
+			manageRoomService.shouzu(Integer.parseInt(userId), Integer.parseInt(currentGuestId),
+					Integer.parseInt(roomId), Integer.parseInt(roomPrice), Integer.parseInt(waterMoney),
+					Integer.parseInt(electMoney), detail);
+
 			return "success";
 		} catch (Exception e) {
 			logger.error(ExceptionUtils.getFullStackTrace(e));
 			return "failure";
 		}
-		
-		
+
 	}
 }

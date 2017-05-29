@@ -31,25 +31,25 @@
 	  	<if test="count > 0">
 	  		update cyy_budget set id = #{id} 
 	  		<if test="guestId!=null and guestId!=''">
-	  			,guestId = "${guestId}" 
+	  			,guestId = ${guestId} 
 	  		</if>
 	  		<if test="roomId!=null and roomId!=''">
-	  			,roomId = "${roomId}"
+	  			,roomId = ${roomId}
 	  		</if>
 	  		<if test="waterMoney!=null and waterMoney!=''">
-	  			,waterMoney = "${waterMoney}" 
+	  			,waterMoney = ${waterMoney}
 	  		</if>  
 	  		<if test="electMoney!=null and electMoney!=''">
-	  			,electMoney = "${electMoney}" 
+	  			,electMoney = ${electMoney} 
 	  		</if>  
 	  		<if test="networkMoney!=null and networkMoney!=''">
-	  			,networkMoney = "${networkMoney}" 
+	  			,networkMoney = ${networkMoney} 
 	  		</if>  
 	  		<if test="rentMoney!=null and rentMoney!=''">
-	  			,rentMoney = "${rentMoney}" 
+	  			,rentMoney = ${rentMoney} 
 	  		</if> 
 	  		<if test="totalMoney!=null and totalMoney!=''">
-	  			,totalMoney = "${totalMoney}" 
+	  			,totalMoney = ${totalMoney} 
 	  		</if>
 	  		<if test="rentStartDate!=null and rentStartDate!=''">
 	  			,rentStartDate = "${rentStartDate}" 
@@ -58,7 +58,7 @@
 	  			,rentEntEndDate = "${rentEntEndDate}" 
 	  		</if>
 	  		<if test="userId!=null and userId!=''">
-	  			,userId = "${userId}" 
+	  			,userId = ${userId} 
 	  		</if>
 	  		<if test="detail!=null and detail!=''">
 	  			,detail = "${detail}" 
@@ -66,7 +66,7 @@
 	  		<if test="createTime!=null and createTime!=''">
 	  			,createTime = "${createTime}" 
 	  		</if>
-	  		,updateTime = now() where IDNo = "${IDNo}"  
+	  		,updateTime = now() where IDNo = ${IDNo}  
 	  	</if>
 	  
 		<if test="count==0">
@@ -104,31 +104,29 @@
 		  		<if test="detail!=null and detail!=''">
 		  			detail, 
 		  		</if>
-		  		<if test="createTime!=null and createTime!=''">
-		  			createTime, 
-		  		</if>
-		  		,updateTime = now() where IDNo = "${IDNo}"  
+		  		createTime 
+		  		,updateTime
 			) values (
 		  		<if test="guestId!=null and guestId!=''">
-		  			#{guestId}, 
-		  		</if>
+		  			 ${guestId}, 
+		  		</if> 
 		  		<if test="roomId!=null and roomId!=''">
-		  			#{roomId},
+		  			${roomId},
 		  		</if>
 		  		<if test="waterMoney!=null and waterMoney!=''">
-		  			#{waterMoney}, 
+		  			${waterMoney}, 
 		  		</if>  
 		  		<if test="electMoney!=null and electMoney!=''">
-		  			#{electMoney}, 
+		  			${electMoney}, 
 		  		</if>  
 		  		<if test="networkMoney!=null and networkMoney!=''">
-		  			#{networkMoney}, 
+		  			${networkMoney}, 
 		  		</if>  
 		  		<if test="rentMoney!=null and rentMoney!=''">
-		  			#{rentMoney}, 
+		  			${rentMoney}, 
 		  		</if> 
 		  		<if test="totalMoney!=null and totalMoney!=''">
-		  			#{totalMoney}, 
+		  			${totalMoney}, 
 		  		</if>
 		  		<if test="rentStartDate!=null and rentStartDate!=''">
 		  			"${rentStartDate}", 
@@ -137,7 +135,7 @@
 		  			"${rentEntEndDate}", 
 		  		</if>
 		  		<if test="userId!=null and userId!=''">
-		  			#{userId}, 
+		  			${userId}, 
 		  		</if>
 		  		<if test="detail!=null and detail!=''">
 		  			"${detail}", 
@@ -145,14 +143,9 @@
 		  		<if test="createTime!=null and createTime!=''">
 		  			"${createTime}", 
 		  		</if>
+		  		now()
 		  		,now()
 			) 
-		
-			insert into cyy_budget(
-			guestId, roomId, waterMoney, electMoney, networkMoney, rentMoney, totalMoney, rentStartDate, rentEntEndDate, userId, detail, createTime, updateTime
-			) values(
-			#{guestId}, #{roomId}, #{waterMoney}, #{electMoney}, #{networkMoney}, #{rentMoney}, #{totalMoney}, "${rentStartDate}", "${rentEntEndDate}", #{userId}, "${detail}", now(), now()
-			)
 		</if>
 	</insert>
 	

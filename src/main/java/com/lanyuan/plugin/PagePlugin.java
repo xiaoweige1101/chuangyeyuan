@@ -188,9 +188,9 @@ public class PagePlugin implements Interceptor {
 	 */
 	public static String suffixStr(String toSql) {
 		toSql =getStringNoBlank(toSql);
-		if(StringUtils.isBlank(source_sql)) {
+//		if(StringUtils.isBlank(source_sql)) {
 			source_sql = toSql;
-		}
+//		}
 
 		toSql=toSql.toLowerCase();
 		int sun = toSql.indexOf(" from ");
@@ -199,9 +199,9 @@ public class PagePlugin implements Interceptor {
 			return suffixStr(toSql.substring(sun+5));
 		}else{
 			toSql = toSql.substring(sun);
-			if (source_sql.length() >= toSql.length()) {
+//			if (source_sql.length() >= toSql.length()) {
 				source_sql=source_sql.substring(source_sql.length()-toSql.length());
-			}
+//			}
 		}
 		return source_sql;
 	}

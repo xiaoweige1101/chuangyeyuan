@@ -145,7 +145,7 @@ function shouzu() {
 	pageii = layer.open({
 		title : "收租",
 		type : 2,
-		area : [ "600px", "60%" ],
+		area : [ "600px", "80%" ],
 		content : rootPath + '/room/shouzu.shtml?roomId=' + cbox.toString()
 	});
 	

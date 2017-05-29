@@ -101,7 +101,7 @@ public class ManageRoomService implements IManageRoomService {
 		budgetFormMap.set("roomId", roomId);
 		budgetFormMap.set("waterMoney", waterMoney);
 		budgetFormMap.set("electMoney", electMoney);
-//		budgetFormMap.set("totalMoney", totalMoney);
+		budgetFormMap.set("rentMoney", 100);
 		budgetFormMap.set("userId", userId);
 		budgetFormMap.set("detail", detail);
 		

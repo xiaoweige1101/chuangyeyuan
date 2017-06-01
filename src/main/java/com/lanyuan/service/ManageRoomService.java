@@ -97,14 +97,15 @@ public class ManageRoomService implements IManageRoomService {
 	}
 	
 	@Transactional(readOnly = false)
-	public void shouzu(int userId, int guestId, int roomId, int rentMoney, int waterMoney, int electMoney, String nextRentTime, String detail) {
+	public void shouzu(int userId, int guestId, int roomId, int rentMoney, int waterMoney, int electMoney, int otherMoney, String nextRentTime, String detail) {
 		
 		Cyy_budgetFormMap budgetFormMap = new Cyy_budgetFormMap();
 		budgetFormMap.set("guestId", guestId);
 		budgetFormMap.set("roomId", roomId);
 		budgetFormMap.set("waterMoney", waterMoney);
 		budgetFormMap.set("electMoney", electMoney);
-		budgetFormMap.set("rentMoney", 100);
+		budgetFormMap.set("rentMoney", rentMoney);
+		budgetFormMap.set("otherMoney", otherMoney);
 		budgetFormMap.set("userId", userId);
 		budgetFormMap.set("detail", detail);
 		

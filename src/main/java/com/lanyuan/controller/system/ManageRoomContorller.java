@@ -142,7 +142,7 @@ public class ManageRoomContorller extends BaseController {
 			String roomPrice = req.getParameter("roomPrice");
 			String electMoney = req.getParameter("electMoney");
 			String waterMoney = req.getParameter("waterMoney");
-			String networkMoney = req.getParameter("networkMoney");
+			String otherMoney = req.getParameter("otherMoney");
 			String roomId = req.getParameter("roomId");
 			String currentGuestId = req.getParameter("currentGuestId");
 			String detail = req.getParameter("detail");
@@ -150,7 +150,7 @@ public class ManageRoomContorller extends BaseController {
 			String nextRentTime = req.getParameter("nextRentTime");
 			
 			logger.info("buildingName:" + buildingName + ",roomName:" + roomName + ",roomPrice:" + roomPrice
-					+ ",electMoney:" + electMoney + ",waterMoney:" + waterMoney + ",networkMoney:" + networkMoney);
+					+ ",electMoney:" + electMoney + ",waterMoney:" + waterMoney + ",otherMoney:" + otherMoney);
 			logger.info("roomId:" + roomId + ", userId:" + userId + ", nextJiaozuDate:" + nextRentTime);
 
 			if (electMoney == null) {
@@ -161,13 +161,13 @@ public class ManageRoomContorller extends BaseController {
 				waterMoney = "0";
 			}
 
-			if (networkMoney == null) {
-				networkMoney = "0";
+			if (otherMoney == null) {
+				otherMoney = "0";
 			}
 
 			manageRoomService.shouzu(Integer.parseInt(userId), Integer.parseInt(currentGuestId),
 					Integer.parseInt(roomId), Integer.parseInt(roomPrice), Integer.parseInt(waterMoney),
-					Integer.parseInt(electMoney), nextRentTime, detail);
+					Integer.parseInt(electMoney), Integer.parseInt(otherMoney), nextRentTime, detail);
 
 			return "success";
 		} catch (Exception e) {

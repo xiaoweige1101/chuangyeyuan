@@ -20,8 +20,8 @@ $(function() {
 			name : "电费",
 			width : "10%"
 		}, {
-			colkey : "networkMoney",
-			name : "网费",
+			colkey : "otherMoney",
+			name : "其他费用",
 			width : "10%"
 		}, {
 			colkey : "rentMoney",

@@ -75,9 +75,9 @@ label[class^="btn btn-default"] {
 			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label" style="width:20%">网费(元)</label>
+				<label class="col-sm-3 control-label" style="width:20%">其他费用(元)</label>
 				<div class="col-sm-9" style="width:60%;">
-					<input type="text" class="form-control" name="networkMoney" id="networkMoney" value="0" />
+					<input type="text" class="form-control" name="otherMoney" id="otherMoney" value="0" />
 				</div>
 			</div>
 			

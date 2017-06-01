@@ -42,8 +42,8 @@
 	  		<if test="electMoney!=null and electMoney!=''">
 	  			,electMoney = ${electMoney} 
 	  		</if>  
-	  		<if test="networkMoney!=null and networkMoney!=''">
-	  			,networkMoney = ${networkMoney} 
+	  		<if test="otherMoney!=null and otherMoney!=''">
+	  			,otherMoney = ${otherMoney} 
 	  		</if>  
 	  		<if test="rentMoney!=null and rentMoney!=''">
 	  			,rentMoney = ${rentMoney} 
@@ -83,8 +83,8 @@
 		  		<if test="electMoney!=null and electMoney!=''">
 		  			electMoney, 
 		  		</if>  
-		  		<if test="networkMoney!=null and networkMoney!=''">
-		  			networkMoney, 
+		  		<if test="otherMoney!=null and otherMoney!=''">
+		  			otherMoney, 
 		  		</if>  
 		  		<if test="rentMoney!=null and rentMoney!=''">
 		  			rentMoney, 
@@ -119,8 +119,8 @@
 		  		<if test="electMoney!=null and electMoney!=''">
 		  			${electMoney}, 
 		  		</if>  
-		  		<if test="networkMoney!=null and networkMoney!=''">
-		  			${networkMoney}, 
+		  		<if test="otherMoney!=null and otherMoney!=''">
+		  			${otherMoney}, 
 		  		</if>  
 		  		<if test="rentMoney!=null and rentMoney!=''">
 		  			${rentMoney}, 

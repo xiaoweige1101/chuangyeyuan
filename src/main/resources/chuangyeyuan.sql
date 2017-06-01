@@ -25,7 +25,7 @@ CREATE TABLE `cyy_budget` (
   `roomId` int(11) DEFAULT NULL,
   `waterMoney` int(11) DEFAULT NULL,
   `electMoney` int(11) DEFAULT NULL,
-  `networkMoney` int(11) DEFAULT NULL,
+  `otherMoney` int(11) DEFAULT NULL,
   `rentMoney` int(11) DEFAULT NULL,
   `totalMoney` int(11) DEFAULT NULL,
   `rentStartDate` date DEFAULT NULL,

@@ -1,10 +1,12 @@
 package com.lanyuan.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lanyuan.entity.Cyy_budgetFormMap;
 import com.lanyuan.entity.Cyy_buildingFormMap;
@@ -94,7 +96,8 @@ public class ManageRoomService implements IManageRoomService {
 		roomMapper.deleteByRoomroomId(id);
 	}
 	
-	public void shouzu(int userId, int guestId, int roomId, int rentMoney, int waterMoney, int electMoney, String detail) {
+	@Transactional(readOnly = false)
+	public void shouzu(int userId, int guestId, int roomId, int rentMoney, int waterMoney, int electMoney, String nextRentTime, String detail) {
 		
 		Cyy_budgetFormMap budgetFormMap = new Cyy_budgetFormMap();
 		budgetFormMap.set("guestId", guestId);
@@ -106,5 +109,13 @@ public class ManageRoomService implements IManageRoomService {
 		budgetFormMap.set("detail", detail);
 		
 		budgetMapper.addOrUpdateById(budgetFormMap);
+		
+		
+		Cyy_roomFormMap roomFormMap = roomMapper.getById(roomId);
+		roomFormMap.set("lastRentTime", new Date());
+		roomFormMap.set("nextRentTime", nextRentTime);
+		
+		roomMapper.addOrUpdateByRoomName(roomFormMap);
+		
 	}
 }

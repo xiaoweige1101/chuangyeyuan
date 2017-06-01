@@ -83,6 +83,16 @@ label[class^="btn btn-default"] {
 			
 			<div class="line line-dashed line-lg pull-in"></div>
 			<div class="form-group">
+				<div class="col-sm-9" style="width:60%;">
+					<label class="col-sm-3 control-label" style="width:40%">下次交租日期:</label>
+					<div class="col-sm-9" style="width:60%;">
+						<input id="nextRentTime" name="nextRentTime" type="date" value="2017-07-01"/>
+					</div>
+				</div>
+			</div>
+			
+			<div class="line line-dashed line-lg pull-in"></div>
+			<div class="form-group">
 				<label class="col-sm-3 control-label" style="width:20%">备注</label>
 				<div class="col-sm-9" style="width:60%;">
 					<input type="text" class="form-control" name="detail" id="detail" value="0" />

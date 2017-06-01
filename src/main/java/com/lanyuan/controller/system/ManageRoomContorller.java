@@ -111,6 +111,7 @@ public class ManageRoomContorller extends BaseController {
 			String buildingName = building.getStr("buildingName");
 			String currentGuestId = String.valueOf(room.getInt("currentGuestId").intValue());
 
+
 			String userId = Common.findUserSessionId(req);
 
 			// manageRoomService.
@@ -146,9 +147,11 @@ public class ManageRoomContorller extends BaseController {
 			String currentGuestId = req.getParameter("currentGuestId");
 			String detail = req.getParameter("detail");
 			String userId = Common.findUserSessionId(req);
+			String nextRentTime = req.getParameter("nextRentTime");
+			
 			logger.info("buildingName:" + buildingName + ",roomName:" + roomName + ",roomPrice:" + roomPrice
 					+ ",electMoney:" + electMoney + ",waterMoney:" + waterMoney + ",networkMoney:" + networkMoney);
-			logger.info("roomId:" + roomId + ", userId:" + userId);
+			logger.info("roomId:" + roomId + ", userId:" + userId + ", nextJiaozuDate:" + nextRentTime);
 
 			if (electMoney == null) {
 				electMoney = "0";
@@ -164,7 +167,7 @@ public class ManageRoomContorller extends BaseController {
 
 			manageRoomService.shouzu(Integer.parseInt(userId), Integer.parseInt(currentGuestId),
 					Integer.parseInt(roomId), Integer.parseInt(roomPrice), Integer.parseInt(waterMoney),
-					Integer.parseInt(electMoney), detail);
+					Integer.parseInt(electMoney), nextRentTime, detail);
 
 			return "success";
 		} catch (Exception e) {

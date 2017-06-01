@@ -142,6 +142,16 @@ function shouzu() {
 		return;
 	}
 	
+	var row = $("#mytable input:checkbox:checked");
+	var guestName = row.parent().siblings()[4].innerHTML;
+	
+	console.log("guestName:" + guestName);
+	
+	if (guestName == "----") {
+		layer.msg("当前房间没有租客!!");
+		return;
+	}
+	
 	pageii = layer.open({
 		title : "收租",
 		type : 2,

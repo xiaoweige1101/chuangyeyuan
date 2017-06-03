@@ -117,6 +117,22 @@ public class ManageRoomService implements IManageRoomService {
 		roomFormMap.set("nextRentTime", nextRentTime);
 		
 		roomMapper.addOrUpdateByRoomName(roomFormMap);
-		
 	}
+	
+	@Override
+	public void registerIn(String roomId, String roomPrice, String guestIDNo, String detail) throws Exception {
+		Cyy_roomFormMap room = roomMapper.getById(Integer.parseInt(roomId));
+		room.set("roomPrice", roomPrice);
+		room.set("detail", detail);
+		
+		Cyy_guestFormMap guestFormMap = new Cyy_guestFormMap();
+		guestFormMap.set("IDNo", guestIDNo);
+		Cyy_guestFormMap guest = guestMapper.getByIDNo(guestFormMap);
+		int guestId = guest.getInt("id");
+		
+		room.set("currentGuestId", guestId);
+		
+		roomMapper.addOrUpdateByRoomName(room);
+	}
+	
 }

@@ -12,4 +12,6 @@ public interface IGuestService {
 	public void addGuest(Cyy_guestFormMap guest) throws ParameterException;
 	
 	public void deleteById(int id);
+	
+	public Cyy_guestFormMap getByIDNo(String IDNo);
 }

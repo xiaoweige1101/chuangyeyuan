@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
 import com.lanyuan.entity.Cyy_buildingFormMap;
+import com.lanyuan.entity.Cyy_guestFormMap;
 import com.lanyuan.entity.Cyy_roomFormMap;
 import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
 import com.lanyuan.plugin.PageView;
+import com.lanyuan.service.GuestService;
 import com.lanyuan.service.ManageRoomService;
 import com.lanyuan.util.Common;
 
@@ -32,6 +34,9 @@ public class ManageRoomContorller extends BaseController {
 
 	@Autowired
 	private ManageRoomService manageRoomService;
+	
+	@Autowired
+	private GuestService guestService;
 
 	/********** 房间管理 ************/
 	@RequestMapping("/list")
@@ -86,6 +91,41 @@ public class ManageRoomContorller extends BaseController {
 		return "success";
 	}
 
+	@RequestMapping("registerInUI")
+	public String registerInUI(Model model) throws Exception {
+		String id = getPara("id");
+		if(Common.isNotEmpty(id)){
+			model.addAttribute("room", manageRoomService.getById(Integer.parseInt(id)));
+		}
+		return Common.BACKGROUND_PATH + "/system/room/registerInUI";
+	}
+	
+	@RequestMapping("registerOutUI")
+	public String registerOutUI(Model model) throws Exception {
+		String id = getPara("id");
+		if(Common.isNotEmpty(id)){
+			model.addAttribute("room", manageRoomService.getById(Integer.parseInt(id)));
+		}
+		return Common.BACKGROUND_PATH + "/system/room/registerOutUI";
+	}
+	
+	@ResponseBody
+	@RequestMapping("registerInUIEntity")
+	@Transactional(readOnly=false)//需要事务操作必须加入此注解
+	@SystemLog(module="房间管理",methods="房间管理-登记入住")//凡需要处理业务逻辑的.都需要记录操作日志
+	public String registerInUIEntity(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
+		String roomName = req.getParameter("room.roomName");
+		String roomPrice = req.getParameter("room.roomPrice");
+		String roomId = req.getParameter("room.id");
+		String guestName_IDNo = req.getParameter("guestName");
+		String detail = req.getParameter("room.detail");
+		
+		System.out.println("roomName:" + roomName + ",roomPrice:" + roomPrice + ",roomId:" + roomId + ",guestName:" + guestName_IDNo + ",roomdetail:" + detail);
+		manageRoomService.registerIn(roomId, roomPrice, guestName_IDNo.split("_")[1], detail);
+		
+		return "success";
+	}
+	
 	// 删除Guest
 	@ResponseBody
 	@RequestMapping("/deleteEntity")

@@ -61,8 +61,11 @@ $(function() {
 	$("#addRole").click("click", function() {
 		addRole();
 	});
-	$("#editRole").click("click", function() {
-		editRole();
+	$("#registerIn").click("click", function() {
+		registerIn();
+	});
+	$("#registerOut").click("click", function() {
+		registerOut();
 	});
 	$("#delRole").click("click", function() {
 		delRole();
@@ -74,7 +77,8 @@ $(function() {
 		shouzu();
 	});
 });
-function editRole() {
+
+function registerIn() {
 	var cbox = grid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {
 		layer.msg("只能选中一个");
@@ -84,9 +88,24 @@ function editRole() {
 		title : "编辑",
 		type : 2,
 		area : [ "600px", "60%" ],
-		content : rootPath + '/room/editUI.shtml?id=' + cbox
+		content : rootPath + '/room/registerInUI.shtml?id=' + cbox
 	});
 }
+
+function registerOut() {
+	var cbox = grid.getSelectedCheckbox();
+	if (cbox.length > 1 || cbox == "") {
+		layer.msg("只能选中一个");
+		return;
+	}
+	pageii = layer.open({
+		title : "登记入住",
+		type : 2,
+		area : [ "600px", "60%" ],
+		content : rootPath + '/room/registerOutUI.shtml?id=' + cbox
+	});
+}
+
 function permissions() {
 	var cbox = grid.getSelectedCheckbox();
 	if (cbox.length > 1 || cbox == "") {

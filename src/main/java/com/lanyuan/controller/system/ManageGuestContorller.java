@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
+import com.lanyuan.entity.Cyy_buildingFormMap;
 import com.lanyuan.entity.Cyy_guestFormMap;
 import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
@@ -103,6 +104,15 @@ public class ManageGuestContorller extends BaseController {
 			guestService.deleteById(Integer.parseInt(id));
 		}
 		return "success";
+	}
+	
+	//获取大楼列表页面
+	@RequestMapping("/getGuestListDiv")
+	public String getGuestListDiv(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		List<Cyy_guestFormMap> guestList = guestService.getGuestList();
+		
+		model.addAttribute("guestList", guestList);
+		return Common.BACKGROUND_PATH + "/system/guest/guestListDiv";
 	}
 	
 }

@@ -23,10 +23,11 @@
 				
 				<td align="left">
 					<div class="doc-buttons">
-						<button type="button" id=addRole class="btn btn-primary marR10">新增</button>
-						<button type="button" id=editRole class="btn btn-primary marR10">编辑</button>
-						<button type="button" id=delRole class="btn btn-primary marR10">删除</button>
-						<button type="button" id=shouzu class="btn btn-primary marR10">收租</button>
+						<button type="button" id=registerIn class="btn btn-primary marR10">登记入住</button>
+						<button type="button" id=registerOut class="btn btn-primary marR10">登记退房</button>
+						<button type="button" id=shouzu class="btn btn-primary marR10">收房租</button>
+						<button type="button" id=addRole class="btn btn-primary marR10">新增房间</button>
+						<button type="button" id=delRole class="btn btn-primary marR10">删除房间</button>
 					</div>
 				</td>
 			</tr>

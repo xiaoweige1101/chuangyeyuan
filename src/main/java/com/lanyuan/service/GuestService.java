@@ -39,4 +39,10 @@ public class GuestService implements IGuestService {
 		guestMapper.deleteByGuestId(id);
 	}
 	
+	@Override
+	public Cyy_guestFormMap getByIDNo(String IDNo) {
+		Cyy_guestFormMap guestFormMap = new Cyy_guestFormMap();
+		guestFormMap.set("IDNo", IDNo);
+		return guestMapper.getByIDNo(guestFormMap);
+	}
 }

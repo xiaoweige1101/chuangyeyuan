@@ -18,5 +18,7 @@ public interface IManageRoomService {
 	
 	public Cyy_buildingFormMap getBuilding(int buildingId);
 	
+	public void registerIn(String roomId, String roomPrice, String guestIDNo, String detail) throws Exception ;
+	
 	
 }

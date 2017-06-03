@@ -135,4 +135,10 @@ public class ManageRoomService implements IManageRoomService {
 		roomMapper.addOrUpdateByRoomName(room);
 	}
 	
+	@Override
+	public void registerOut(String roomId, String detail) throws Exception {
+		Cyy_roomFormMap room = roomMapper.getById(Integer.parseInt(roomId));
+		room.set("currentGuestId", null);
+		
+	}
 }

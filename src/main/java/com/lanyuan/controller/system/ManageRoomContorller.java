@@ -105,6 +105,12 @@ public class ManageRoomContorller extends BaseController {
 		String id = getPara("id");
 		if(Common.isNotEmpty(id)){
 			model.addAttribute("room", manageRoomService.getById(Integer.parseInt(id)));
+			
+			Cyy_roomFormMap roomFormMap = manageRoomService.getById(Integer.parseInt(id));
+			int guestId = roomFormMap.getInt("currentGuestId").intValue();
+			
+			Cyy_guestFormMap guest = guestService.getById(guestId);
+			model.addAttribute("guestName", guest.getStr("name"));
 		}
 		return Common.BACKGROUND_PATH + "/system/room/registerOutUI";
 	}
@@ -122,6 +128,23 @@ public class ManageRoomContorller extends BaseController {
 		
 		System.out.println("roomName:" + roomName + ",roomPrice:" + roomPrice + ",roomId:" + roomId + ",guestName:" + guestName_IDNo + ",roomdetail:" + detail);
 		manageRoomService.registerIn(roomId, roomPrice, guestName_IDNo.split("_")[1], detail);
+		
+		return "success";
+	}
+	
+	@ResponseBody
+	@RequestMapping("registerOutUIEntity")
+	@Transactional(readOnly=false)//需要事务操作必须加入此注解
+	@SystemLog(module="房间管理",methods="房间管理-登记退房")//凡需要处理业务逻辑的.都需要记录操作日志
+	public String registerOutUIEntity(HttpServletRequest req, HttpServletResponse res, Model model) throws Exception {
+		String roomName = req.getParameter("room.roomName");
+		String roomPrice = req.getParameter("room.roomPrice");
+		String roomId = req.getParameter("room.id");
+		String guestName = req.getParameter("guestName");
+		String detail = req.getParameter("room.detail");
+		
+		System.out.println("roomName:" + roomName + ",roomPrice:" + roomPrice + ",roomId:" + roomId + ",guestName:" + guestName+ ",roomdetail:" + detail);
+		manageRoomService.registerIn(roomId, roomPrice, guestName, detail);
 		
 		return "success";
 	}

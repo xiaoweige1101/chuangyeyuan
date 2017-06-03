@@ -85,7 +85,7 @@ function registerIn() {
 		return;
 	}
 	pageii = layer.open({
-		title : "编辑",
+		title : "登记入住",
 		type : 2,
 		area : [ "600px", "60%" ],
 		content : rootPath + '/room/registerInUI.shtml?id=' + cbox
@@ -99,7 +99,7 @@ function registerOut() {
 		return;
 	}
 	pageii = layer.open({
-		title : "登记入住",
+		title : "登记退房",
 		type : 2,
 		area : [ "600px", "60%" ],
 		content : rootPath + '/room/registerOutUI.shtml?id=' + cbox

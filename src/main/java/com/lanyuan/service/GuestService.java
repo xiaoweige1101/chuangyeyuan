@@ -45,4 +45,9 @@ public class GuestService implements IGuestService {
 		guestFormMap.set("IDNo", IDNo);
 		return guestMapper.getByIDNo(guestFormMap);
 	}
+	
+	@Override
+	public Cyy_guestFormMap getById(int id) {
+		return guestMapper.getById(id);
+	}
 }

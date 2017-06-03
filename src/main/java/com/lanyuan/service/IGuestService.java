@@ -14,4 +14,6 @@ public interface IGuestService {
 	public void deleteById(int id);
 	
 	public Cyy_guestFormMap getByIDNo(String IDNo);
+	
+	public Cyy_guestFormMap getById(int id);
 }

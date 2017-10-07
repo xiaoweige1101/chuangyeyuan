@@ -78,6 +78,8 @@ public class BudgetService implements IBudgetService {
 	@Override
 	public void addBudget(Cyy_budgetFormMap budget) throws ParameterException {
 		
+		
+		System.out.println("=========addBudget=========");
 //		Cyy_guestFormMap guestFormMap = guestMapper.getByIDNo(budget);
 //		
 //		if (guestFormMap != null) {

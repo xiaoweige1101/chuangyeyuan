@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanyuan.annotation.SystemLog;
 import com.lanyuan.controller.index.BaseController;
-import com.lanyuan.entity.Cyy_buildingFormMap;
 import com.lanyuan.entity.Cyy_guestFormMap;
 import com.lanyuan.exception.ParameterException;
 import com.lanyuan.exception.SystemException;
 import com.lanyuan.plugin.PageView;
 import com.lanyuan.service.GuestService;
 import com.lanyuan.util.Common;
+
+
 
 @Controller
 @RequestMapping("/guest")

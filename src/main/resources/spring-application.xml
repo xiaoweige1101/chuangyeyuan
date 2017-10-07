@@ -37,7 +37,7 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<property name="driverClassName" value="${jdbc.driverClass}" />
-	</bean>
+</bean>
 	
 	<bean id="pagePlugin" class="com.lanyuan.plugin.PagePlugin">
 		<property name="properties">
@@ -84,13 +84,28 @@
 			<tx:method name="logicDelById" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice> -->
-	<!-- <aop:aspectj-autoproxy proxy-target-class="true"/> 
-	 <bean id="log4jHandlerAOP" class="com.lanyuan.logAop.LogAopAction"></bean> 
-		<aop:config proxy-target-class="true">
-		    <aop:aspect id="logAspect" ref="log4jHandlerAOP"> 
-		    <aop:pointcut id="logPointCut" expression="execution(* org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(..))" /> 
-		    <aop:around method="logAll" pointcut-ref="logPointCut" /> </aop:aspect> 
-		</aop:config> -->
+
+	<aop:aspectj-autoproxy proxy-target-class="true"/> 
+	
+	<!-- AOP 配置 -->
+
+	<bean id="log4jHandlerAOP" class="com.lanyuan.logAop.LogAopAction"></bean> 
+<!--
+	<bean id="log4jHandlerAOP" class="com.lanyuan.controller.XMLAdvice"></bean> 
+-->
+	<aop:config>
+		<aop:aspect id="logAspect" ref="log4jHandlerAOP"> 
+			<aop:pointcut id="logPointCut" expression="execution(* com.lanyuan.logAop..*.*(..)) or execution(* com.lanyuan.controller.system..*.*(..))" /> 
+<!--	
+			<aop:around method="doAround" pointcut-ref="logPointCut" />
+			<aop:after-throwing method="doThrowing" throwing="ex" pointcut-ref="logPointCut" />
+-->
+			<aop:around method="doController" pointcut-ref="logPointCut" />
+			<aop:after-throwing method="doAfterThrowing" throwing="e" pointcut-ref="logPointCut" />
+
+		</aop:aspect> 
+	</aop:config> 
+
 	<!-- 使用Spring组件扫描的方式来实现自动注入bean -->
 	<context:component-scan base-package="com.lanyuan.task" />
 	<!-- 隐式地向 Spring 容器注册 -->

@@ -140,5 +140,7 @@ public class ManageRoomService implements IManageRoomService {
 		Cyy_roomFormMap room = roomMapper.getById(Integer.parseInt(roomId));
 		room.set("currentGuestId", null);
 		
+		
+		
 	}
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanyuan.mapper.chuangyeyuan.C_budgetMapper">
+
+	<resultMap id="BaseResultMap" type="com.lanyuan.entity.chuangyeyuan.C_budgetFormMap" >
+		<id column="id" property="id" jdbcType="int" />
+		<result column="roomId" property="roomId" jdbcType="varchar" />
+		<result column="guestId" property="guestId" jdbcType="varchar" />
+		<result column="budgetNo" property="budgetNo" jdbcType="varchar" />
+		<result column="waterMoney" property="waterMoney" jdbcType="int" />
+		<result column="electMoney" property="electMoney" jdbcType="int" />
+		<result column="otherMoney" property="otherMoney" jdbcType="int" />
+		<result column="rentMoney" property="rentMoney" jdbcType="int" />
+		<result column="totalMoney" property="totalMoney" jdbcType="int" />
+		<result column="rentStartDate" property="rentStartDate" jdbcType="datetime" />
+		<result column="rentEndDate" property="rentEndDate" jdbcType="datetime" />
+		<result column="userId" property="userId" jdbcType="int" />
+		<result column="detail" property="detail" jdbcType="varchar" />
+		<result column="createTime" property="createTime" jdbcType="datetime" />
+		<result column="updateTime" property="updateTime" jdbcType="datetime" />
+	</resultMap>
+
+	<sql id="budgetColumns">
+		id, roomId, guestId, budgetNo, waterMoney, electMoney, otherMoney, rentMoney, totalMoney, rentStartDate, rentEndDate, userId, detail, createTime, updateTime
+	</sql>
+	
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="budgetColumns" />
+		from c_budget where id = #{id, jdbcType=INTEGER} 
+	</select>
+	
+	<select id="getByCondition">
+	
+	</select>
+
+</mapper>
